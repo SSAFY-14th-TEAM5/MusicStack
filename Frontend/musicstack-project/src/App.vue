@@ -1,11 +1,27 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <header>
+    <nav>
+      <RouterLink :to="{ name: 'SignUpView' }">SignUpPage</RouterLink> |
+      <RouterLink :to="{ name: 'LogInView' }">LogInPage</RouterLink>
+      <form @submit.prevent="logOut">
+        <input type="submit" value="LogOut">
+      </form>
+    </nav>
+  </header>
+  <RouterView />
 </template>
 
-<style scoped></style>
+<script setup>
+  import { RouterView, RouterLink } from 'vue-router'
+  import { useAccountStore } from '@/stores/accounts'
+
+  const accountStore = useAccountStore()
+  const logOut = function () {
+    accountStore.logOut()
+  }
+</script>
+
+
+<style scoped>
+
+</style>
