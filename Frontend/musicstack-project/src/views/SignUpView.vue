@@ -17,7 +17,7 @@
       
       <div class="genre-selection">
         <p>좋아하는 장르를 선택해주세요 (다중 선택 가능)</p>
-        <div calss="genre-list">
+        <div class="genre-list">
           <button
             v-for="genre in allGenres" 
             :key="genre.id"

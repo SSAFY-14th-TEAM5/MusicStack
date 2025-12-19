@@ -4,11 +4,14 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 export const useAccountStore = defineStore('account', () => {
+
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const user = ref(null)  // 유저 정보 조회시 사용
 
   const router = useRouter()
 
+  // 회원 가입
   const signUp = function (payload) {
     const username = payload.username
     const password1 = payload.password1
@@ -35,7 +38,7 @@ export const useAccountStore = defineStore('account', () => {
       .catch(err => console.log(err))
   }
 
-
+  // 유저 로그인
   const logIn = function (payload) {
   //   const username = payload.username
   //   const password = payload.password
@@ -51,7 +54,7 @@ export const useAccountStore = defineStore('account', () => {
         console.log('로그인이 완료되었습니다.')
         console.log(res.data)
         token.value = res.data.key
-        router.push({ name: 'ArticleView' })
+        router.push({ name: 'Home' })
       })
       .catch(err => console.log(err))
   }
@@ -61,7 +64,7 @@ export const useAccountStore = defineStore('account', () => {
     return token.value ? true : false
   })
 
-
+  // 유저 로그아웃
   const logOut = function () {
     axios({
       method: 'post',
@@ -74,11 +77,30 @@ export const useAccountStore = defineStore('account', () => {
       .catch(err => console.log(err))
   }
 
+  // 유저 정보 조회
+  const getUserInfo = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/accounts/user/`,
+      headers: {
+        Authorization: `Token ${token.value}`,
+      },
+    })
+      .then(res => {
+        user.value = res.data
+      })
+      .catch(err => {
+        console.log('유저 정보 조회 실패', err)
+      })
+  }
+
   return {
     signUp,
     logIn,
     token,
+    user,
     isLogin,
     logOut,
+    getUserInfo,
   }
 }, { persist: true })
