@@ -43,7 +43,7 @@ export const useAccountStore = defineStore('account', () => {
   //   const username = payload.username
   //   const password = payload.password
     const { username, password } = payload
-    axios({
+    return axios({
       method: 'post',
       url: `${API_URL}/accounts/login/`,
       data: {
@@ -56,7 +56,10 @@ export const useAccountStore = defineStore('account', () => {
         token.value = res.data.key
         router.push({ name: 'Home' })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        throw err // LogInView에 err 전달
+      })
   }
 
 
@@ -68,7 +71,10 @@ export const useAccountStore = defineStore('account', () => {
   const logOut = function () {
     axios({
       method: 'post',
-      url: `${API_URL}/accounts/logout/`
+      url: `${API_URL}/accounts/logout/`,
+      headers: {
+      Authorization: `Token ${token.value}`, // 토큰 정보도 같이 넘김
+      },
     })
       .then(res => {
         token.value = null
