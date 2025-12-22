@@ -1,6 +1,9 @@
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 # from tracks.models import Genre
+
+User = get_user_model()
 
 class CustomRegisterSerializer(RegisterSerializer):
     # 추가하고 싶은 필드 정의
@@ -34,3 +37,12 @@ class CustomRegisterSerializer(RegisterSerializer):
 
         user.save()
         return user
+    
+
+class ProfileSerializer(serializers.ModelSerializer):
+    followings_count = serializers.IntegerField(read_only=True)
+    followers_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'nickname', 'followings_count', 'followers_count')
