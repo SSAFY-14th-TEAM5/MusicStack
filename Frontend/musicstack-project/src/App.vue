@@ -11,6 +11,15 @@
           >
             Home
           </RouterLink>
+
+          <RouterLink
+            v-if="accountStore.isLogin"
+            class="nav-link-custom"
+            :to="{ name: 'ArticleView' }"
+            >
+              Community
+          </RouterLink>
+            
         </div>
 
         <!-- 가운데 브랜드 -->
