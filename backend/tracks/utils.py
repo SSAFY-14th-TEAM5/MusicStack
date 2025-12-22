@@ -1,13 +1,14 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-import musicbrainzngs as mb
+# import musicbrainzngs as mb
 import json
-from .models import Track, Genre, Artist
+from .models import Track, Artist, Genre
 from dotenv import load_dotenv
 import os
 import time
 from pprint import pprint
 import random
+from openai import OpenAI
 
 load_dotenv()
 
@@ -17,6 +18,10 @@ client_secret = os.getenv('CLIENT_SECRET')
 client_credentials_manager = SpotifyClientCredentials(client_id= client_id, client_secret= client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
+# 요청 헤더에 한국어를 1순위로 설정
+sp._session.headers.update({
+    'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
+})
 
 def update_spotify_tracks_artist_genre():
     # JSON 형식의 API를 반복을 통해 리스트에 담고, 각 리스트에 담긴 데이터를 JSON 파일로 저장하는 과정입니다.
@@ -102,57 +107,159 @@ def update_spotify_tracks_artist_genre():
     return return_data
 
 
-def collect_pop_tracks():
-    # 1. 'pop' 장르를 가진 아티스트들을 검색 (시장을 'US'로 설정하여 국내곡 제외)
-    results = sp.search(q='genre:pop', type='artist', limit=50, market='US')
+def extract_artist(user_input):
+    client = OpenAI(
+        api_key = os.getenv("GMS_KEY"),
+        base_url = "https://gms.ssafy.io/gmsapi/api.openai.com/v1"
+    )
+
+    response = client.chat.completions.create(
+        model="gpt-5-mini",
+        messages=[
+            {
+                "role": "developer",
+                "content": """
+                    너는 Spotify API 검색 최적화를 위한 아티스트 이름 정규화 도우미야.
+
+                    다음 규칙을 반드시 지켜서 아티스트 이름을 변환해줘.
+
+                    [역할]
+                    - 입력된 가수 이름이 한국어일 경우,
+                    Spotify에서 실제로 가장 많이 사용되고 검색 성공률이 높은
+                    **공식 영문 활동명(stage name 또는 등록명)**을 추론해서 반환한다.
+
+                    [변환 규칙]
+                    1. 한국어 이름 → Spotify 기준 공식 영문 활동명
+                    - 실명 기반 활동명: 표준 로마자 표기 또는 실제 Spotify 등록명 우선
+                        (예: 정승환 → Jung Seung Hwan)
+                    - 예명/약칭/브랜드형 이름: Spotify에서 통용되는 대표 영문명 사용
+                        (예: 아이유 → IU, 볼빨간사춘기 → Bol4)
+                    2. 영문 이름이 이미 입력된 경우:
+                    - 철자 수정이나 변형 없이 그대로 사용한다.
+                    3. 그룹/밴드명도 동일한 기준으로 적용한다.
+                    4. Spotify에 아티스트로 등록되지 않았을 가능성이 높다면 제외한다.
+                    5. 확신할 수 없는 경우에도 임의 생성하지 말고 제외한다.
+
+                    [출력 형식 제약]
+                    - 반드시 JSON **단일 객체**만 출력한다.
+                    - 설명, 주석, 텍스트, 마크다운을 절대 포함하지 않는다.
+                    - 결과 형식은 아래와 정확히 일치해야 한다.
+
+                    {
+                        "artists": [
+                            {
+                            "original": "원본 이름",
+                            "english": "Spotify 검색용 공식 영문명"
+                            }
+                        ]
+                    }
+
+                    [예시]
+                    입력: ["정승환", "아이유", "볼빨간사춘기"]
+                    출력:
+                    {
+                        "artists": [
+                            {"original": "정승환", "english": "Jung Seung Hwan"},
+                            {"original": "아이유", "english": "IU"},
+                            {"original": "볼빨간사춘기", "english": "Bol4"}
+                        ]
+                    }
+
+                    [예외 처리]
+                    - 가수가 한 명도 없으면 다음과 같이 반환한다:
+                    {
+                        "artists": []
+                    }
+                """
+            },
+            {
+                "role": "user",
+                "content": user_input
+            }
+        ]
+    )
+
+    return response
+
+
+def get_artist(artist_name):
+    results = sp.search(q='artist:' + artist_name, type='artist', limit=1, market='KR')
+    items = results['artists']['items']
     
-    for artist in results['artists']['items']:
-        artist_name = artist['name']
-        genres = artist['genres'] 
-        artist_id = artist['id']
+    if len(items) > 0:
+        artist = items[0]
+        return artist['id'], artist['genres']
+    
+    return None
 
-        # 아티스트가 있으면 가져오고, 없으면 생성 (get_or_create 활용)
-        artist_obj, created = Artist.objects.get_or_create(artist_id=artist_id)
-        
-        # 새로운 아티스트면 장르 추가
-        if created:
-            artist_obj.name = artist_name
-            artist_obj.artist_id = artist_id
-            artist_obj.save()
 
-            for genre in genres:
-                genre_obj, created = Genre.objects.get_or_create(name=genre)
-                artist_obj.genre.add(genre_obj)
+def get_top_10_tracks(artist_id):
+    results = sp.artist_top_tracks(artist_id, country='KR')
+    top_tracks = []
+    for track in results['tracks']:
+        top_tracks.append({
+            'name': track['name'],
+            'artist': track['artists'][0]['name'],
+            'id': track['id'],
+            'album_image': track['album']['images'][0]['url'] if track['album']['images'] else None,
+            'release_date': track['album']['release_date'],
+            'release_year': int(track['album']['release_date'][:4])
+        })
         
-        # 2. 해당 아티스트의 인기 곡(Top Tracks) 가져오기
-        top_tracks = sp.artist_top_tracks(artist_id, country='US')['tracks']
+    return top_tracks
 
-        print(top_tracks)
+
+# def collect_pop_tracks():
+#     # 1. 'pop' 장르를 가진 아티스트들을 검색 (시장을 'US'로 설정하여 국내곡 제외)
+#     results = sp.search(q='genre:pop', type='artist', limit=50, market='US')
+    
+#     for artist in results['artists']['items']:
+#         artist_name = artist['name']
+#         genres = artist['genres'] 
+#         artist_id = artist['id']
+
+#         # 아티스트가 있으면 가져오고, 없으면 생성 (get_or_create 활용)
+#         artist_obj, created = Artist.objects.get_or_create(artist_id=artist_id)
         
-        for t in top_tracks:
-            track_name = t['name']
+#         # 새로운 아티스트면 장르 추가
+#         if created:
+#             artist_obj.name = artist_name
+#             artist_obj.artist_id = artist_id
+#             artist_obj.save()
+
+#             for genre in genres:
+#                 genre_obj, created = Genre.objects.get_or_create(name=genre)
+#                 artist_obj.genre.add(genre_obj)
+        
+#         # 2. 해당 아티스트의 인기 곡(Top Tracks) 가져오기
+#         top_tracks = sp.artist_top_tracks(artist_id, country='US')['tracks']
+
+#         print(top_tracks)
+        
+#         for t in top_tracks:
+#             track_name = t['name']
             
-            # (중복 체크 로직)
-            if Track.objects.filter(track_id=t['id']).exists():
-                print("이미 존재함")
-                continue
+#             # (중복 체크 로직)
+#             if Track.objects.filter(track_id=t['id']).exists():
+#                 print("이미 존재함")
+#                 continue
 
-            # (저장 로직)
-            track_db = Track()
-            track_db.track_name = t['name']
-            track_db.track_id = t['id']
-            track_db.track_popularity = t['popularity']
-            track_db.artist_name = t['artists'][0]['name']
-            track_db.release_date_text = t['album']['release_date']
-            track_db.release_year = int(t['album']['release_date'][:4])
-            track_db.duration_ms = t['duration_ms']
-            track_db.track_image_link = t['album']['images'][0]['url']
-            track_db.save() # 장르 추가 전에 먼저 저장
+#             # (저장 로직)
+#             track_db = Track()
+#             track_db.track_name = t['name']
+#             track_db.track_id = t['id']
+#             track_db.track_popularity = t['popularity']
+#             track_db.artist_name = t['artists'][0]['name']
+#             track_db.release_date_text = t['album']['release_date']
+#             track_db.release_year = int(t['album']['release_date'][:4])
+#             track_db.duration_ms = t['duration_ms']
+#             track_db.track_image_link = t['album']['images'][0]['url']
+#             track_db.save() # 장르 추가 전에 먼저 저장
 
-            print(track_db.track_name)
-            print(genres)
+#             print(track_db.track_name)
+#             print(genres)
             
-            print(f"✅ 수집 완료: {artist_name} - {track_name} (장르: {genres})")
+#             print(f"✅ 수집 완료: {artist_name} - {track_name} (장르: {genres})")
 
 
 # def get_musicbrainz_recording_id(track_name, artist_name):
