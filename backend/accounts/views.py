@@ -8,15 +8,15 @@ from rest_framework.response import Response
 User = get_user_model()
 # Create your views here.
 @api_view(['GET', ])
-def profile(request, user_id):
+def profile(request, user_pk):
     if request.method == 'GET':
-        user = get_object_or_404(
-            User.objects.annotate(
-                followings_count=Count('followings'),
-                followers_count=Count('followers')
-            ),
-            pk=user_id
-        )
+        user_queryset = User.objects.annotate(
+            followings_count=Count('followings'),
+            followers_count=Count('followers')
+        ).prefetch_related('favorite_tracks')
+
+        # 2. 미리 준비한 쿼리셋에서 특정 유저를 찾습니다.
+        user = get_object_or_404(user_queryset, pk=user_pk)
 
         serializer = ProfileSerializer(user)
         return Response(serializer.data)
