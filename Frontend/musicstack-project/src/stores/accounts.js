@@ -17,7 +17,7 @@ export const useAccountStore = defineStore('account', () => {
     const password1 = payload.password1
     const password2 = payload.password2
     const nickname = payload.nickname
-    const fav_genres = payload.fav_genres
+    // const fav_genres = payload.fav_genres
     
     // const { username, password1, password2, nickname } = payload
 
@@ -26,7 +26,8 @@ export const useAccountStore = defineStore('account', () => {
       url: `${API_URL}/accounts/signup/`,
       data: {
         username, password1, password2, 
-        nickname, fav_genres
+        nickname,
+        // fav_genres,
       }
     })
       .then(res => {

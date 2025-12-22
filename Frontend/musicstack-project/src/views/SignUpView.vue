@@ -26,7 +26,7 @@
         </div>
 
         <!-- 장르 선택 -->
-        <div class="genre-section">
+        <!-- <div class="genre-section">
           <p class="genre-title">🎧 좋아하는 장르 (다중 선택)</p>
           <div class="genre-list">
             <button
@@ -40,7 +40,7 @@
               {{ genre.name }}
             </button>
           </div>
-        </div>
+        </div> -->
 
         <button class="signup-btn" type="submit">
           Create Account
@@ -55,22 +55,22 @@
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
 
-  const allGenres = ref([])
+  // const allGenres = ref([])
 
-  onMounted(() => {
-    getGenres()
-  })
+  // onMounted(() => {
+  //   getGenres()
+  // })
 
-  const getGenres = function() {
-    axios({
-      method: 'get',
-      url: 'http://127.0.0.1:8000/api/v1/tracks/genres/'
-    }).then((res) => {
-      allGenres.value = res.data
-    }).catch((err) => {
-      console.log('장르 목록 로드 실패', err)
-    })
-  }
+  // const getGenres = function() {
+  //   axios({
+  //     method: 'get',
+  //     url: 'http://127.0.0.1:8000/api/v1/tracks/genres/'
+  //   }).then((res) => {
+  //     allGenres.value = res.data
+  //   }).catch((err) => {
+  //     console.log('장르 목록 로드 실패', err)
+  //   })
+  // }
 
   const accountStore = useAccountStore()
 
@@ -78,17 +78,17 @@
   const password1 = ref(null)
   const password2 = ref(null)
   const nickname = ref(null)
-  const selectedGenres = ref([])
+  // const selectedGenres = ref([])
 
-  const toggleGenre = (genreId) => {
-  if (selectedGenres.value.includes(genreId)) {
-    // 이미 선택되어 있으면 제거
-    selectedGenres.value = selectedGenres.value.filter(id => id !== genreId)
-  } else {
-    // 선택 안 되어 있으면 추가
-    selectedGenres.value.push(genreId)
-  }
-}
+//   const toggleGenre = (genreId) => {
+//   if (selectedGenres.value.includes(genreId)) {
+//     // 이미 선택되어 있으면 제거
+//     selectedGenres.value = selectedGenres.value.filter(id => id !== genreId)
+//   } else {
+//     // 선택 안 되어 있으면 추가
+//     selectedGenres.value.push(genreId)
+//   }
+// }
 
   const signUp = function () {
     const payload = {
@@ -96,7 +96,7 @@
       password1: password1.value,
       password2: password2.value,
       nickname: nickname.value,
-      fav_genres: selectedGenres.value,
+      // fav_genres: selectedGenres.value,
     }
     accountStore.signUp(payload)
     
