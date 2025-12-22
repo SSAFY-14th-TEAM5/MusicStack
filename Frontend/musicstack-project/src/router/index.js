@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAccountStore } from '@/stores/accounts'
-import Home from '@/components/Home.vue'
+import Home from '@/views/Home.vue'
 import LogInView from '@/views/LogInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import SearchView from '@/views/SearchView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/profile',
       name: 'ProfileView',
       component : ProfileView
+    },
+    {
+      path: '/search',
+      name: 'SearchView',
+      component : SearchView
     },
   ],
 })
