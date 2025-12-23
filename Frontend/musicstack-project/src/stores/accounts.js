@@ -8,6 +8,9 @@ export const useAccountStore = defineStore('account', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const user = ref(null)  // 유저 정보 조회시 사용
+  const userPk = computed(() => {
+    return user.value?.id ?? user.value?.pk ?? null
+  })
 
   const router = useRouter()
 
@@ -56,6 +59,7 @@ export const useAccountStore = defineStore('account', () => {
         console.log(res.data)
         token.value = res.data.key
         router.push({ name: 'Home' })
+        return getUserInfo()
       })
       .catch(err => {
         console.log(err)
@@ -79,6 +83,7 @@ export const useAccountStore = defineStore('account', () => {
     })
       .then(res => {
         token.value = null
+        user.value = null
         router.push({ name: 'LogInView' })
       })
       .catch(err => console.log(err))
@@ -86,26 +91,24 @@ export const useAccountStore = defineStore('account', () => {
 
   // 유저 정보 조회
   const getUserInfo = function () {
-    axios({
-      method: 'get',
-      url: `${API_URL}/accounts/user/`,
-      headers: {
-        Authorization: `Token ${token.value}`,
-      },
-    })
-      .then(res => {
-        user.value = res.data
-      })
-      .catch(err => {
-        console.log('유저 정보 조회 실패', err)
-      })
-  }
+  return axios({
+    method: 'get',
+    url: `${API_URL}/accounts/user/`,
+    headers: { Authorization: `Token ${token.value}` },
+  })
+  .then(res => {
+    user.value = res.data
+    return user.value
+  })
+}
+
 
   return {
     signUp,
     logIn,
     token,
     user,
+    userPk,
     isLogin,
     logOut,
     getUserInfo,
