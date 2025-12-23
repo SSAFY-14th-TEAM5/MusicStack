@@ -11,7 +11,18 @@
   import MainProfile from '@/components/MainProfile.vue'
   import UserLikedList from '@/components/UserLikedList.vue'
   import UserRecommendList from '@/components/UserRecommendList.vue'
-  import { RouterView } from 'vue-router'
+  import { onMounted } from 'vue'
+  import { useAccountStore } from '@/stores/accounts'
+  import { useFavoriteStore } from '@/stores/favorite'
+
+  const accountStore = useAccountStore()
+  const favoriteStore = useFavoriteStore()
+
+  onMounted(() => {
+    if (accountStore.userPk) {
+      favoriteStore.fetchFavorites(accountStore.userPk)
+    }
+  })
 
 
 </script>

@@ -1,70 +1,67 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import axios from 'axios'
 
 export const useSearchStore = defineStore('search', () => {
-
   const API_URL = 'http://127.0.0.1:8000/api/v1'
 
-  // ===== state =====
-  const keyword = ref('')
-  const artist = ref(null)     // 가수 정보
-  const tracks = ref([])       // 노래 리스트
-  const isLoading = ref(false)
-  const error = ref(null)
+  const loading = ref(false)
+  const success = ref(false)
+  const artist = ref(null)
+  const tracks = ref([])
+  const errorMessage = ref(null)
+  const cache = ref({}) // (검색 결과 캐시)
 
-  // ===== actions =====
-  const search = async (query) => {
-    if (!query.trim()) return
+  const normalize = (str) =>
+    str.trim().toLowerCase()
 
-    keyword.value = query
-    isLoading.value = true
-    error.value = null
+  const search = async (keyword) => {
+    const normalized = normalize(keyword)
+
+    // 캐시에 있으면 API 호출 X
+    if (cache.value[normalized]) {
+      console.log('캐시 사용 → API 호출 스킵')
+
+      const cached = cache.value[normalized]
+      success.value = cached.success
+      artist.value = cached.artist
+      tracks.value = cached.tracks
+      return
+    }
+
+    loading.value = true
+    errorMessage.value = null
 
     try {
-      const res = await axios({
-        method: 'post',
-        url: `${API_URL}/tracks/search/`,
-        data: {
-          user_input: query,   // 검색어 (LLM으로 전달)
-        }
+      const res = await axios.post(`${API_URL}/tracks/search/`, {
+        user_input: keyword, //  핵심
       })
 
-      /**
-       * 🔽 백엔드 응답 예시
-       * {
-       *   artist: { id, name, image, genre },
-       *   tracks: [{ id, title, album, cover }]
-       * }
-       */
-
+      success.value = res.data.success
       artist.value = res.data.artist
       tracks.value = res.data.tracks
 
+      // 2. 결과 캐시에 저장
+      cache.value[normalized] = {
+        success: success.value,
+        artist: artist.value,
+        tracks: tracks.value,
+      }
     } catch (err) {
-      console.error('검색 실패', err)
-      error.value = '검색에 실패했습니다.'
+      errorMessage.value = '검색에 실패했습니다.'
+      console.error(err)
     } finally {
-      isLoading.value = false
+      loading.value = false
     }
   }
 
-  // ===== reset (선택) =====
-  const reset = () => {
-    keyword.value = ''
-    artist.value = null
-    tracks.value = []
-    error.value = null
-  }
-
   return {
-    keyword,
+    loading,
+    success,
     artist,
     tracks,
-    isLoading,
-    error,
+    errorMessage,
+    cache,
     search,
-    reset,
   }
 }, { persist: true })
