@@ -5,20 +5,37 @@ import axios from 'axios'
 import { useAccountStore } from '@/stores/accounts'
 
 export const useArticleStore = defineStore('article', () => {
-  const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000/api/v1'
   const accountStore = useAccountStore()
   const router = useRouter()
+  
+  const articles = ref([])
+  // 페이지네이션 코드
+  const count = ref(0)
+  const next = ref(null)
+  const previous = ref(null)
+  const currentPage = ref(1)
+  const pageSize = 10
+
+  // 페이지 계산
+  const totalPages = computed(() =>
+    Math.ceil(count.value / pageSize)
+  )
 
   // 게시글 조회
-  const getArticles = function () {
+  const getArticles = function (page = 1) {
     axios({
       method: 'get',
-      url: `${API_URL}/articles/`,
+      url: `${API_URL}/articles/?page=${page}`,
     })
     .then(res => {
       console.log(res.data)
-      articles.value = res.data.results})
+      articles.value = res.data.results
+      count.value = res.data.count
+      next.value = res.data.next
+      previous.value = res.data.previous
+      currentPage.value = page
+    })
     .catch(err => {
       console.log(err)
     })
@@ -83,7 +100,12 @@ export const useArticleStore = defineStore('article', () => {
 
   return {
     articles,
+    count,
+    next,
+    previous,
+    currentPage,
     router,
+    totalPages,
     getArticles,
     createArticle,
     getArticleDetail,

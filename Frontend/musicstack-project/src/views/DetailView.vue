@@ -1,35 +1,46 @@
 <template>
-  <div>
-    <h1>Detail</h1>
-    <div v-if="article">
-      <p>글 번호: {{ article.id }}</p>
+  <div class="detail-page">
+    <div v-if="article" class="detail-card">
+      <h2 class="detail-title">{{ article.title }}</h2>
+
+      <div class="detail-meta">
+        <span>작성일 {{ article.created_at }}</span>
+        <span v-if="article.updated_at">
+          · 수정 {{ article.updated_at }}
+        </span>
+      </div>
+
       <!-- 수정 모드 -->
-      <div v-if="isEdit">
-        <input v-model="editTitle" />
-        <textarea v-model="editContent"></textarea>
+      <div v-if="isEdit" class="edit-box">
+        <input v-model="editTitle" class="edit-input" />
+        <textarea v-model="editContent" class="edit-textarea"></textarea>
 
-        <button @click="submitEdit">저장</button>
-        <button @click="cancelEdit">취소</button>
+        <div class="edit-actions">
+          <button class="primary-btn" @click="submitEdit">저장</button>
+          <button class="ghost-btn" @click="cancelEdit">취소</button>
+        </div>
       </div>
 
-      <!-- 일반 보기 모드 -->
-      <p>제목: {{ article.title }}</p>
-      <p>내용: {{ article.content }}</p>
-      <p>작성시간: {{ article.created_at }}</p>
-      <p>수정시간: {{ article.updated_at }}</p>
-      
-      <div v-if="isAuthor" class="author-actions">
-        <button @click="goEdit">수정</button>
-        <button @click="removeArticle">삭제</button>
+      <!-- 일반 보기 -->
+      <p v-else class="detail-content">
+        {{ article.content }}
+      </p>
+
+      <!-- 작성자 액션 -->
+      <div v-if="isAuthor && !isEdit" class="author-actions">
+        <button class="ghost-btn" @click="startEdit">수정</button>
+        <button class="danger-btn" @click="deleteThisArticle">삭제</button>
       </div>
 
-      <!-- DetailView.vue 하단 -->
-      <CommentCreate :articleId="articleId" @created="loadComments" />
-      <CommentList
-        :comments="comments"
-        :articleId="articleId"
-        @updated="loadComments"
-      />
+      <!-- 댓글 영역 -->
+      <div class="comment-section">
+        <CommentCreate :articleId="articleId" @created="loadComments" />
+        <CommentList
+          :comments="comments"
+          :articleId="articleId"
+          @updated="loadComments"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -128,6 +139,110 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
+.detail-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
 
+.detail-card {
+  background: white;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 */
+.detail-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* 날짜 */
+.detail-meta {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+/* 본문 */
+.detail-content {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+  white-space: pre-line;
+}
+
+/* 수정 영역 */
+.edit-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-input,
+.edit-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+.edit-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* 버튼 */
+.primary-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ghost-btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.danger-btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #ff4d4f;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 작성자 버튼 */
+.author-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* 댓글 */
+.comment-section {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
 </style>
