@@ -121,9 +121,9 @@ def fav_save(request):
             )
 
             # 가수 연결
-            artist_name = track_data.get('artist_name')
-            if artist_name:
-                artist, _ = Artist.objects.get_or_create(name=artist_name)
+            artist_id = track_data.get('artist_id')
+            if artist_id:
+                artist, _ = Artist.objects.get_or_create(name=artist_id)
                 track.artist.add(artist)
             
             # 3. 좋아요 추가
