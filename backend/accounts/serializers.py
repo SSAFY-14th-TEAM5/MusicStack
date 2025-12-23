@@ -52,11 +52,15 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class CustomLoginSerializer(LoginSerializer):
     def validate(self, attrs):
+        # 부모 클래스의 validate를 통해 인증을 수행하고 기본 응답 데이터(token 등)를 받음
         data = super().validate(attrs)
         
-        # self.user는 super().validate(attrs) 이후에 채워집니다.
-        # 응답 바디(response body)에 유저의 pk와 추가 정보를 넣습니다.
-        data['user_pk'] = self.user.pk
+        # attrs 딕셔너리에 담긴 인증된 유저 객체를 안전하게 가져옴
+        user = attrs.get('user')
+
+        if user:
+            # 가져온 user 객체에서 pk를 추출하여 응답 데이터에 추가
+            data['user_pk'] = user.pk
 
         return data
     
