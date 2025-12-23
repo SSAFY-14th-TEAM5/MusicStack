@@ -1,8 +1,8 @@
 from dj_rest_auth.registration.serializers import RegisterSerializer
+from dj_rest_auth.serializers import LoginSerializer
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from tracks.models import Track
-# from tracks.models import Genre
 
 User = get_user_model()
 
@@ -48,3 +48,21 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'nickname', 'followings_count', 'followers_count',)
+
+
+class CustomLoginSerializer(LoginSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        
+        # self.user는 super().validate(attrs) 이후에 채워집니다.
+        # 응답 바디(response body)에 유저의 pk와 추가 정보를 넣습니다.
+        data['user_pk'] = self.user.pk
+
+        return data
+    
+
+class CustomUserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+
+        fields = ('pk', 'username', 'nickname',)
