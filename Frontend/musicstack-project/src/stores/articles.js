@@ -8,7 +8,9 @@ export const useArticleStore = defineStore('article', () => {
   const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000/api/v1'
   const accountStore = useAccountStore()
+  const router = useRouter()
 
+  // 게시글 조회
   const getArticles = function () {
     axios({
       method: 'get',
@@ -22,8 +24,9 @@ export const useArticleStore = defineStore('article', () => {
     })
   }
 
+  // 게시글 생성
   const createArticle = function ({ title, content }) {
-    axios({
+    return axios({
       method: 'post',
       url: `${API_URL}/articles/`,
       data: {
@@ -34,9 +37,13 @@ export const useArticleStore = defineStore('article', () => {
         Authorization: `Token ${accountStore.token}`
       },
     })
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res)
+      router.push({ name: 'ArticleView' })
+    })
   }
 
+  // 게시글 상세 조회
   const getArticleDetail = function (articleId) {
     return axios({
       method: 'get',
@@ -50,10 +57,37 @@ export const useArticleStore = defineStore('article', () => {
     // })
   }
 
+  /* 🔹 게시글 수정 */
+  const updateArticle = function (articleId, payload) {
+    return axios({
+      method: 'patch',
+      url: `${API_URL}/articles/${articleId}/`,
+      data: payload,
+      headers: {
+        Authorization: `Token ${accountStore.token}`,
+      },
+    })
+  }
+
+  /* 🔹 게시글 삭제 */
+  const deleteArticle = function (articleId) {
+    return axios({
+      method: 'delete',
+      url: `${API_URL}/articles/${articleId}/`,
+      headers: {
+        Authorization: `Token ${accountStore.token}`,
+      },
+    })
+  }
+
+
   return {
     articles,
+    router,
     getArticles,
     createArticle,
     getArticleDetail,
+    updateArticle,
+    deleteArticle,
   }
 }, { persist: true })
