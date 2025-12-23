@@ -3,9 +3,15 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated # 인증된 사용자만 허용
-from .models import Artist, Genre
-from .utils import update_spotify_tracks_artist_genre, extract_artist, get_artist, get_top_10_tracks
+from .models import Artist, Genre, Track
+from .utils import extract_artist, get_artist, get_top_10_tracks
 import json
+from .serializers import TrackSerializer, FavTrackSerializer
+from rest_framework.pagination import PageNumberPagination
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+
+User = get_user_model()
 
 # @api_view(['GET', ])
 # def genre_list(request):
@@ -14,11 +20,11 @@ import json
 #         serializer = GenreListSerializer(genres, many=True)
 #         return Response(serializer.data)
     
-@api_view(['GET', ])
-def collect(request):
-    if request.method == 'GET':
-        data = update_spotify_tracks_artist_genre()
-        return Response(data)
+# @api_view(['GET', ])
+# def collect(request):
+#     if request.method == 'GET':
+#         data = update_spotify_tracks_artist_genre()
+#         return Response(data)
     
 @api_view(['POST',])
 def search(request):
@@ -31,8 +37,6 @@ def search(request):
     content_dict = json.loads(content_str)
 
     artist_list = content_dict.get('artists', [])
-
-    print(artist_list)
 
     isEmpty = False
     success = True
@@ -60,7 +64,7 @@ def search(request):
 
             if not new_artist_id:
                 success = False
-
+            
             new_artist = Artist()
             new_artist.name = artist_eng
             new_artist.artist_id = new_artist_id
@@ -94,6 +98,58 @@ def search(request):
         'tracks': tracks
     }
 
-    print(genres)
-
     return Response(data)
+
+
+@api_view(['POST', ])
+@permission_classes([IsAuthenticated])
+def fav_save(request):
+    track_data = request.data.get('track')
+
+    if request.method == 'POST':
+        if not track_data:
+            return Response({"error": "데이터가 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 시리얼라이저에 데이터를 넣고 검증
+        serializer = TrackSerializer(data=track_data)
+
+        if serializer.is_valid():
+            # 중복 방지를 위해 get_or_create 활용
+            track, created = Track.objects.get_or_create(
+                track_id = serializer.validated_data.get('track_id'),
+                defaults=serializer.validated_data
+            )
+
+            # 가수 연결
+            artist_name = track_data.get('artist_name')
+            if artist_name:
+                artist, _ = Artist.objects.get_or_create(name=artist_name)
+                track.artist.add(artist)
+            
+            # 3. 좋아요 추가
+            track.favorited_by.add(request.user)
+            
+            return Response({"message": "좋아요"}, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['GET'])
+def fav_get(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+
+    tracks = user.favorite_tracks.all().order_by('-id')
+
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
+    page = paginator.paginate_queryset(tracks, request)
+
+    if page is not None:
+        # 시리얼라이즈 (전체 tracks가 아닌 쪼개진 page 데이터를 넣음)
+        serializer = FavTrackSerializer(page, many=True)
+        # 페이지네이션 전용 응답 반환 (count, next, previous 등이 포함됨)
+        return paginator.get_paginated_response(serializer.data)
+
+    # 페이지 데이터가 없는 경우의 기본 응답
+    serializer = FavTrackSerializer(tracks, many=True)
+    return Response(serializer.data)

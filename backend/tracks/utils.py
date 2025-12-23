@@ -2,7 +2,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 # import musicbrainzngs as mb
 import json
-from .models import Track, Artist, Genre
+from .models import Track, Artist
 from dotenv import load_dotenv
 import os
 import time
@@ -22,89 +22,6 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 sp._session.headers.update({
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
 })
-
-def update_spotify_tracks_artist_genre():
-    # JSON 형식의 API를 반복을 통해 리스트에 담고, 각 리스트에 담긴 데이터를 JSON 파일로 저장하는 과정입니다.
-    track_data = []
-    return_data = []
-
-    for i in range(0, 100, 50):
-        # 연도를 기준으로 검색
-        # track_results = sp.search(q='year:2025', type='track', limit=50, offset=i)
-
-        # 랜덤하게 트랙 수집
-        random_char = random.choice('abcdefghijklmnopqrstuvwxyz')
-        query = f"%{random_char}%"
-        
-        # 2. 랜덤한 시작 위치(offset) 설정, Spotify 검색 결과는 최대 10,000개까지 접근 가능
-        random_offset = random.randint(0, 500) 
-        
-        # 3. 검색 실행
-        track_results = sp.search(q=query, type='track', limit=10, offset=random_offset)
-
-        for t in track_results['tracks']['items']:
-
-            if Track.objects.filter(track_id=t['id']).exists():
-                continue
-
-            # 아티스트 정보를 통해 장르 정보 가져오기
-            artist_id = t['artists'][0]['id']
-            artist_info = sp.artist(artist_id)  # 아티스트 정보 가져오기
-            genres = artist_info['genres']  # 장르 정보 가져오기
-
-            track_db = Track()
-            track_db.track_name = t['name']
-            track_db.track_id = t['id']
-            track_db.track_popularity = t['popularity']
-            track_db.artist_name = t['artists'][0]['name']
-            track_db.release_date_text = t['album']['release_date']
-            track_db.release_year = int(t['album']['release_date'][:4])
-            track_db.duration_ms = t['duration_ms']
-            track_db.track_image_link = t['album']['images'][0]['url']
-            track_db.save() # 장르 추가 전에 먼저 저장
-
-            print(track_db.track_name)
-            print(genres)
-
-            # 아티스트 정보가 이미 있다면 건너뜀
-            if Artist.objects.filter(artist_id=artist_id).exists():
-                artist_obj = Artist.objects.get(artist_id=artist_id)
-                track_db.artist.add(artist_obj)
-                continue
-
-            # 아티스트 정보가 없다면 아티스트 객체를 저장
-            artist_db = Artist()
-            artist_db.name = t['artists'][0]['name']
-            artist_db.artist_id = artist_id
-
-            # 저장 후 장르 정보 추가
-            artist_db.save()
-
-            if genres:
-                for genre in genres:
-                    # 장르가 있으면 가져오고, 없으면 생성 (get_or_create 활용)
-                    genre_obj, created = Genre.objects.get_or_create(name=genre)
-                    
-                    # Track에 장르 할당
-                    # 만약 ForeignKey라면 한 트랙에 장르 하나만 저장됨 (마지막 것이 덮어씀)
-                    artist_db.genre.add(genre_obj) 
-
-            # 예시: 스포티파이에서 가져온 트랙 정보
-            track_name = track_db.track_name
-            artist_name = track_db.artist_name
-
-            return_data = {
-                'status': 'saved',
-                'name': track_db.track_name,
-                'artist': track_db.artist_name,
-                'spotify_id': track_db.track_id,
-                'genre': genres,
-            }
-            
-            # API 부하를 줄이기 위해 짧은 휴식 (권장)
-            time.sleep(1)
-    
-    return return_data
 
 
 def extract_artist(user_input):
@@ -198,15 +115,101 @@ def get_top_10_tracks(artist_id):
     top_tracks = []
     for track in results['tracks']:
         top_tracks.append({
-            'name': track['name'],
-            'artist': track['artists'][0]['name'],
-            'id': track['id'],
+            'track_name': track['name'],
+            'artist_name': track['artists'][0]['name'],
+            'artist_id': track['artists'][0]['id'],
+            'track_id': track['id'],
             'album_image': track['album']['images'][0]['url'] if track['album']['images'] else None,
             'release_date': track['album']['release_date'],
             'release_year': int(track['album']['release_date'][:4])
         })
         
     return top_tracks
+
+
+# def update_spotify_tracks_artist_genre():
+#     # JSON 형식의 API를 반복을 통해 리스트에 담고, 각 리스트에 담긴 데이터를 JSON 파일로 저장하는 과정입니다.
+#     track_data = []
+#     return_data = []
+
+#     for i in range(0, 100, 50):
+#         # 연도를 기준으로 검색
+#         # track_results = sp.search(q='year:2025', type='track', limit=50, offset=i)
+
+#         # 랜덤하게 트랙 수집
+#         random_char = random.choice('abcdefghijklmnopqrstuvwxyz')
+#         query = f"%{random_char}%"
+        
+#         # 2. 랜덤한 시작 위치(offset) 설정, Spotify 검색 결과는 최대 10,000개까지 접근 가능
+#         random_offset = random.randint(0, 500) 
+        
+#         # 3. 검색 실행
+#         track_results = sp.search(q=query, type='track', limit=10, offset=random_offset)
+
+#         for t in track_results['tracks']['items']:
+
+#             if Track.objects.filter(track_id=t['id']).exists():
+#                 continue
+
+#             # 아티스트 정보를 통해 장르 정보 가져오기
+#             artist_id = t['artists'][0]['id']
+#             artist_info = sp.artist(artist_id)  # 아티스트 정보 가져오기
+#             genres = artist_info['genres']  # 장르 정보 가져오기
+
+#             track_db = Track()
+#             track_db.track_name = t['name']
+#             track_db.track_id = t['id']
+#             track_db.track_popularity = t['popularity']
+#             track_db.artist_name = t['artists'][0]['name']
+#             track_db.release_date_text = t['album']['release_date']
+#             track_db.release_year = int(t['album']['release_date'][:4])
+#             track_db.duration_ms = t['duration_ms']
+#             track_db.track_image_link = t['album']['images'][0]['url']
+#             track_db.save() # 장르 추가 전에 먼저 저장
+
+#             print(track_db.track_name)
+#             print(genres)
+
+#             # 아티스트 정보가 이미 있다면 건너뜀
+#             if Artist.objects.filter(artist_id=artist_id).exists():
+#                 artist_obj = Artist.objects.get(artist_id=artist_id)
+#                 track_db.artist.add(artist_obj)
+#                 continue
+
+#             # 아티스트 정보가 없다면 아티스트 객체를 저장
+#             artist_db = Artist()
+#             artist_db.name = t['artists'][0]['name']
+#             artist_db.artist_id = artist_id
+
+#             # 저장 후 장르 정보 추가
+#             artist_db.save()
+
+#             if genres:
+#                 for genre in genres:
+#                     # 장르가 있으면 가져오고, 없으면 생성 (get_or_create 활용)
+#                     genre_obj, created = Genre.objects.get_or_create(name=genre)
+                    
+#                     # Track에 장르 할당
+#                     # 만약 ForeignKey라면 한 트랙에 장르 하나만 저장됨 (마지막 것이 덮어씀)
+#                     artist_db.genre.add(genre_obj) 
+
+#             # 예시: 스포티파이에서 가져온 트랙 정보
+#             track_name = track_db.track_name
+#             artist_name = track_db.artist_name
+
+#             return_data = {
+#                 'status': 'saved',
+#                 'name': track_db.track_name,
+#                 'artist': track_db.artist_name,
+#                 'spotify_id': track_db.track_id,
+#                 'genre': genres,
+#             }
+            
+#             # API 부하를 줄이기 위해 짧은 휴식 (권장)
+#             time.sleep(1)
+    
+#     return return_data
+
 
 
 # def collect_pop_tracks():
