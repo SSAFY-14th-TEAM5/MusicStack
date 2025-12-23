@@ -122,7 +122,7 @@ const loadMore = () => {
 </script>
 
 <style>
-  /* .fade-enter-active,
+  .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.25s ease;
   }
@@ -220,7 +220,7 @@ const loadMore = () => {
     text-align: center;
     color: #888;
     font-size: 0.95rem;
-  } */
+  }
 
 
 

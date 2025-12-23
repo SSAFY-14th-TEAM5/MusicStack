@@ -14,7 +14,7 @@ def article_list(request):
 
         # 1. 페이지네이션 객체 설정
         paginator = PageNumberPagination()
-        paginator.page_size = 10  # 한 페이지당 게시글 수
+        paginator.page_size = 5  # 한 페이지당 게시글 수
         
         # 2. 쿼리셋 쪼개기
         page = paginator.paginate_queryset(articles, request)

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- <h3>Article List</h3> -->
+  <div class="article-list">
     <ArticleListItem 
       v-for="article in store.articles"
       :key="article.id"
@@ -16,3 +15,12 @@
   const store = useArticleStore()
 
 </script>
+
+<style scoped>
+/* 게시글 리스트 전체 레이아웃 */
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+</style>
