@@ -22,6 +22,14 @@
         <button @click="goEdit">수정</button>
         <button @click="removeArticle">삭제</button>
       </div>
+
+      <!-- DetailView.vue 하단 -->
+      <CommentCreate :articleId="articleId" @created="loadComments" />
+      <CommentList
+        :comments="comments"
+        :articleId="articleId"
+        @updated="loadComments"
+      />
     </div>
   </div>
 </template>
@@ -32,17 +40,25 @@ import { onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useArticleStore } from '@/stores/articles'
 import { useAccountStore } from '@/stores/accounts'
+import CommentList from '@/components/comments/CommentList.vue'
+import CommentCreate from '@/components/comments/CommentCreate.vue'
+import { useCommentStore } from '@/stores/comments'
 
 const store = useArticleStore()
 const route = useRoute()
 const article = ref(null)
-const articleId = route.params.id
+const articleId = Number(route.params.id)
 const router = useRouter()
 const accountStore = useAccountStore()
 
+// 로그인 (작성자 계정) 관련  
 const isEdit = ref(false)
 const editTitle = ref('')
 const editContent = ref('')
+
+// 댓글 관련
+const commentStore = useCommentStore()
+const comments = ref([])
 
 /* 🔹 작성자 여부 */
 const isAuthor = computed(() => {
@@ -97,6 +113,19 @@ const deleteThisArticle = () => {
     })
     .catch(err => console.log(err))
 }
+
+// 댓글 연결
+const loadComments = () => {
+  commentStore.getComments(articleId)
+    .then(res => {
+      comments.value = res.data.results
+    })
+    .catch(err => console.log(err))
+}
+
+onMounted(() => {
+  loadComments()
+})
 </script>
 
 <style>

@@ -94,7 +94,7 @@ def comment_detail(request, article_pk, comment_pk):
         return Response(serializer.data)
     
     elif request.method == 'PUT':
-        if article.author != request.user:  
+        if comment.author != request.user:  
             return Response({"detail": "권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
         
         serializer = CommentSerializer(comment, data=request.data)
@@ -103,7 +103,7 @@ def comment_detail(request, article_pk, comment_pk):
             return Response(serializer.data)
         
     elif request.method == 'DELETE':
-        if article.author != request.user:  
+        if comment.author != request.user:  
             return Response({"detail": "권한이 없습니다."}, status=status.HTTP_403_FORBIDDEN)
         
         comment.delete()
