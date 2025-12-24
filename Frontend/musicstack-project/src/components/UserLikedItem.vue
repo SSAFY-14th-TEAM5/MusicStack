@@ -16,6 +16,13 @@
     >
       🎵 프로필 뮤직으로 설정
     </button>
+
+    <!-- ✅ 유튜브 영상 -->
+    <YoutubeTrackCard
+      v-if="track.video_id"
+      :track="track"
+      title="🎬 뮤직 비디오"
+    />
   </div>
 
   <div v-else class="loading">
@@ -29,13 +36,14 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useFavoriteStore } from '@/stores/favorite'
 import { useAccountStore } from '@/stores/accounts'
+import YoutubeTrackCard from '@/components/YoutubeTrackCard.vue'
 
 const route = useRoute()
 const track = ref(null)
 
 const favoriteStore = useFavoriteStore()
 const accountStore = useAccountStore()
-const trackId = route.params.trackId
+
 
 
 onMounted(() => {
@@ -46,7 +54,14 @@ onMounted(() => {
 })
 
 const setAsProfileMusic = () => {
-  accountStore.setProfileMusic(track.value)
+  // accountStore.setProfileMusic(track.value)
+  accountStore.setProfileMusic({
+    track_id: track.value.track_id,
+    track_name: track.value.track_name,
+    artist: track.value.artist,
+    track_image_link: track.value.track_image_link,
+    video_id: track.value.video_id, // ⭐ 중요
+  })
   alert('프로필 뮤직으로 설정되었습니다 🎶')
 }
 </script>
