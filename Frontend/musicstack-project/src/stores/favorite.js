@@ -42,10 +42,11 @@ export const useFavoriteStore = defineStore('favorite', () => {
       track_id: track.track_id,                     // 검색결과 id → track_id
       track_image_link: track.album_image,    // album_image → track_image_link
       release_date_text: track.release_date,  // release_date → release_date_text
-      release_year: track.release_year,
-      // views.py에서 artist_name을 따로 읽고 있으니 보내주기
-      artist_name: track.name,
+      release_year: track.release_year,                   
+      artist_id: track.artist_id ? [...track.artist_id] : [],        // views.py에서 artist_name을 따로 읽고 있으니 보내주기 
     }
+
+    console.log(payloadTrack)
 
     try {
       await axios.post(
