@@ -52,6 +52,17 @@ const router = createRouter({
       name: 'DetailView',
       component: DetailView
     },
+    {
+      path: '/liked/:trackId',
+      name: 'UserLikedItem',
+      component: () => import('@/components/UserLikedItem.vue'),
+    },
+    {
+      path: '/tracks/:trackId',
+      name: 'UserLikedItem',
+      component: () => import('@/components/UserLikedItem.vue'),
+    },
+
   ],
 })
 
