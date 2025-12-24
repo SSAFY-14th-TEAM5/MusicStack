@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 import { useAccountStore } from '@/stores/accounts'
 
 export const useFavoriteStore = defineStore('favorite', () => {
@@ -9,6 +10,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
   const favorites = ref([])
   const loading = ref(false)
   const errorMessage = ref(null)
+  const router = useRouter()
 
   // ✅ 좋아요 목록 조회
   const fetchFavorites = async (userPk) => {
@@ -67,11 +69,20 @@ export const useFavoriteStore = defineStore('favorite', () => {
     }
   }
 
+  // 노래 상세 페이지로 이동
+  const goDetail = (track) => {
+    router.push({
+      name: 'UserLikedItem',
+      params: { trackId: track.track_id }, // ✅ track_id 사용
+    })
+  }
+
   return {
     favorites,
     loading,
     errorMessage,
     fetchFavorites,
     saveFavorite,
+    goDetail,
   }
 }, { persist: true })

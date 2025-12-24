@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h1>Profile Page</h1>
+  <div class="profile-page">
+    <!-- <h1>Profile Page</h1> -->
     <MainProfile />
-    <UserLikedList />
+    <!-- <UserLikedList /> -->
     <UserRecommendList />
   </div>
 </template>
@@ -28,5 +28,10 @@
 </script>
 
 <style scoped>
+  .profile-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
 
 </style>

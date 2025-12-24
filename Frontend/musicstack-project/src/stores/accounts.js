@@ -102,6 +102,19 @@ export const useAccountStore = defineStore('account', () => {
   })
 }
 
+  // 프로필 뮤직 상태 추가
+  const profileMusic = ref(null)
+
+  const setProfileMusic = (track) => {
+    profileMusic.value = {
+      track_id: track.track_id,
+      track_name: track.track_name,
+      artist: track.artist,
+      image: track.track_image_link,
+    }
+  }
+
+
 
   return {
     signUp,
@@ -112,5 +125,7 @@ export const useAccountStore = defineStore('account', () => {
     isLogin,
     logOut,
     getUserInfo,
+    profileMusic,
+    setProfileMusic,
   }
 }, { persist: true })
