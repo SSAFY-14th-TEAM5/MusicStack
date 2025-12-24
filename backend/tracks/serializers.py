@@ -26,7 +26,7 @@ class FavTrackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = ('track_id', 'track_name', 'artist', 'track_image_link', 'release_date_text', 'release_year')
+        fields = ('track_id', 'track_name', 'artist', 'track_image_link', 'release_date_text', 'release_year', 'video_id',)
 
 
 class LatestFavTrackSerializer(serializers.ModelSerializer):
