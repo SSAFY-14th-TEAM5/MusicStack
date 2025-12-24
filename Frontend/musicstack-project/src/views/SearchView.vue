@@ -23,8 +23,8 @@
     <div v-if="searchStore.success">
       <h2>{{ searchStore.artist[0] }}</h2>
     
-      <div class="track-info">
-        <div v-for="track in visibleTracks" :key="track.id" class="track-card">
+      <div class="track-info track-grid">
+        <div v-for="track in visibleTracks" :key="track.track_id" class="track-card">
           <img :src="track.album_image" alt="앨범 이미지">
           <p class="track-title">{{ track.track_name }}</p>
           <p class="track-year">{{ track.release_year }}</p>
@@ -76,7 +76,7 @@ const likeTrack = (track) => {
 }
 
 /* 🔹 몇 개까지 보여줄지 */
-const visibleCount = ref(1)
+const visibleCount = ref(4)
 
 /* 🔹 실제 화면에 보여줄 트랙 */
 const visibleTracks = computed(() =>
@@ -103,19 +103,27 @@ const search = (value) => {
 // })
 
 /* URL 변경 감지 */
+// onMounted(() => {
+//   const q = route.query.q
+//   if (q) {
+//     visibleCount.value = 1
+//     searchStore.search(q)
+//   }
+// })
 watch(
   () => route.query.q,
   (newQ) => {
     if (!newQ) return
-    visibleCount.value = 1
+    visibleCount.value = 4
     searchStore.search(newQ)
-  }
+  },
+  { immediate: true }
 )
 
 /* 더 보기 버튼 */
 const loadMore = () => {
   visibleCount.value = Math.min(
-    visibleCount.value + 3,
+    visibleCount.value + 4,
     searchStore.tracks.length
   )
 }

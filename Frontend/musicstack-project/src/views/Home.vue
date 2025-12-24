@@ -25,10 +25,10 @@ import SearchBar from '@/components/SearchBar.vue'
 const router = useRouter()
 const keyword = ref('')
 
-const onSearch = (value) => {
+const onSearch = (keyword) => {
   router.push({
     name: 'SearchView',
-    query: { q: value },
+    query: { q: keyword },
   })
 }
 </script>
