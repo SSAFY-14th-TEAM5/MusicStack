@@ -90,6 +90,42 @@ def search(request):
         # 노래를 검색
         tracks = get_top_10_tracks(artist_db.artist_id)
 
+        # 반환된 결과를 통해 유튜브 video id 검색 
+        for track in tracks:
+            # 1. DB에서 해당 트랙을 먼저 찾음
+            track_obj = Track.objects.filter(track_id=track["track_id"]).first()
+
+            # 2. DB에 있고 video_id도 있다면 바로 사용
+            if track_obj and track_obj.video_id:
+                track["video_id"] = track_obj.video_id
+                
+
+            else:
+            # 3. DB에 없거나 video_id가 없다면 유튜브 검색 실행
+                search_query = f"{track['artist_name']} {track['track_name']} official mv"
+                video_id = get_video_id(search_query)
+                track["video_id"] = video_id # 찾았으면 id, 못 찾았으면 None
+                
+                # 4. 검색 결과를 DB에 반영 (저장)
+                if video_id:
+                    if track_obj:
+                        # DB에 트랙은 있는데 video_id만 없었던 경우
+                        track_obj.video_id = video_id
+                        track_obj.save()
+                        track_obj.artist.add(artist_db)
+                    else:
+                        # DB에 트랙 자체가 없었던 경우 (필요 시 새로운 객체 생성)
+                        # Track.objects.create(track_id=track["track_id"], video_id=video_id, ...)
+                        new_track = Track.objects.create(
+                            track_id=track["track_id"],
+                            track_name=track["track_name"],
+                            video_id=video_id,
+                            track_image_link=track.get("album_image", ""), # 프론트에서 쓰는 필드들 저장
+                            release_date_text=track["release_date"],
+                            release_year=track["release_year"],
+                        )
+                        new_track.artist.add(artist_db)
+
     data = {
         'isEmpty': isEmpty,
         'success': success,
@@ -128,8 +164,6 @@ def fav_save(request):
                 'track_image_link': v_data.get('track_image_link'),
             }
         )
-
-        print(track_data)
 
         # 아티스트 연결 로직
         if artist_ids:
