@@ -23,7 +23,6 @@
           :src="track.track_image_link"
           alt="album cover"
           class="album-img"
-          @click="goDetail(track)"
         />
         <p class="title">{{ track.track_name }}</p>
         <p class="artist">
@@ -32,6 +31,12 @@
         <p class="year">{{ track.release_year }}</p>
       </div>
     </div>
+
+    <!-- <YoutubeTrackCard
+      :track="latestFavTrack"
+      title="최근 좋아요한 곡"
+    /> -->
+
 
   </div>
 </template>
@@ -42,10 +47,17 @@ import { onMounted, watch } from 'vue'
 import { useFavoriteStore } from '@/stores/favorite'
 import { useAccountStore } from '@/stores/accounts'
 import { useRouter } from 'vue-router'
+import YoutubeTrackCard from './YoutubeTrackCard.vue'
 
 const favoriteStore = useFavoriteStore()
 const accountStore = useAccountStore()
 const router = useRouter()
+
+// const latestFavTrack = ref(null)
+
+// // axios로 받아온 response.data 그대로 넣으면 됨
+// latestFavTrack.value = response.data
+
 
 onMounted(() => {
   // 1️⃣ 이미 userPk가 있으면 바로 호출
@@ -67,6 +79,7 @@ onMounted(() => {
 
 const goDetail = (trackId) => {
   console.log('클릭된 trackId:', trackId)
+  // console.log(track)
   router.push({
     name: 'UserLikedItem',
     params: { trackId }

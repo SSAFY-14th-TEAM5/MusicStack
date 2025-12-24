@@ -44,7 +44,7 @@ const editContent = ref(props.comment.content)
 
 /* 작성자 여부 */
 const isAuthor = computed(() => {
-  return props.comment.author === accountStore.userPk
+  return props.comment.author.id === accountStore.userPk
 })
 
 const startEdit = () => {

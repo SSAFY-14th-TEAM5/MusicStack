@@ -14,9 +14,30 @@
         <p class="artist">
           {{ profileMusic.artist.map(a => a.name).join(', ') }}
         </p>
+
+        <button
+          class="play-btn"
+          @click="playMusic"
+        >
+          ▶ 재생
+        </button>
+        <!-- <pre>{{ profileMusic }}</pre> -->
       </div>
     </div>
 
+    <!-- 유튜브 플레이어 -->
+    <div
+      v-if="showPlayer && profileMusic.video_id"
+      class="youtube-wrapper"
+    >
+      <iframe
+        :key="profileMusic.video_id"
+        :src="youtubeUrl"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
 
 
     <!-- 🔹 Profile Card -->
@@ -50,6 +71,8 @@
   <div v-else class="text-center mt-5">
     <p>유저 정보를 불러오는 중입니다...</p>
   </div>
+
+  
 </template>
 
 <script setup>
@@ -60,12 +83,27 @@
   // Pinia state를 반응성 유지한 채로 구조 분해위해 사용
   import { storeToRefs } from 'pinia'
   import { useAccountStore } from '@/stores/accounts'
-  import { onMounted } from 'vue'
+  import { ref, computed, onMounted } from 'vue'
   
 
   const accountStore = useAccountStore()
   const { user } = storeToRefs(accountStore)
   const { profileMusic } = storeToRefs(accountStore)
+
+  const showPlayer = ref(false)
+
+  const youtubeUrl = computed(() => {
+    if (!profileMusic.value?.video_id) return ''
+    return `https://www.youtube.com/embed/${profileMusic.value.video_id}?autoplay=1`
+  })
+
+  const playMusic = () => {
+    showPlayer.value = false
+    setTimeout(() => {
+      showPlayer.value = true
+    }, 0)
+  }
+
 
   // 새로고침 대응
   onMounted(() => {
@@ -123,4 +161,18 @@
   font-size: 0.85rem;
   color: #666;
 }
+
+/* 유튜브 */
+.youtube-wrapper {
+  margin-bottom: 30px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.youtube-wrapper iframe {
+  width: 100%;
+  height: 315px;
+}
+
 </style>

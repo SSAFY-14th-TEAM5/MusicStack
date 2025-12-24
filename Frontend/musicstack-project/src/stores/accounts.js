@@ -13,6 +13,7 @@ export const useAccountStore = defineStore('account', () => {
   })
 
   const router = useRouter()
+  const profileMusic = ref(null)
 
   // 회원 가입
   const signUp = function (payload) {
@@ -84,6 +85,7 @@ export const useAccountStore = defineStore('account', () => {
       .then(res => {
         token.value = null
         user.value = null
+        profileMusic.value = null 
         router.push({ name: 'LogInView' })
       })
       .catch(err => console.log(err))
@@ -103,7 +105,6 @@ export const useAccountStore = defineStore('account', () => {
 }
 
   // 프로필 뮤직 상태 추가
-  const profileMusic = ref(null)
 
   const setProfileMusic = (track) => {
     profileMusic.value = {
