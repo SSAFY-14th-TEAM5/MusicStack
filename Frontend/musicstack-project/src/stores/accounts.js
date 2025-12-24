@@ -112,6 +112,7 @@ export const useAccountStore = defineStore('account', () => {
       track_name: track.track_name,
       artist: track.artist,
       image: track.track_image_link,
+      video_id: track.video_id,
     }
   }
 

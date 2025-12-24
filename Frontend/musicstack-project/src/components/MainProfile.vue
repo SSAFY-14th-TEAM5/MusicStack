@@ -1,43 +1,38 @@
 <template>
   <div v-if="user" class="container my-5">
 
-    <!-- 프로필 뮤직 표시 -->
-    <div v-if="profileMusic" class="profile-music-card">
-      <img
-        :src="profileMusic.image"
-        class="img-cover profile-music-cover"
-      />
-
-      <div class="profile-music-info">
-        <p class="label">🎵 프로필 뮤직</p>
-        <p class="title">{{ profileMusic.track_name }}</p>
-        <p class="artist">
-          {{ profileMusic.artist.map(a => a.name).join(', ') }}
-        </p>
-
-        <button
-          class="play-btn"
-          @click="playMusic"
-        >
-          ▶ 재생
-        </button>
-        <!-- <pre>{{ profileMusic }}</pre> -->
-      </div>
-    </div>
-
-    <!-- 유튜브 플레이어 -->
+    <!-- ✅ 프로필 뮤직 + 유튜브 가로 배치 -->
     <div
-      v-if="showPlayer && profileMusic.video_id"
-      class="youtube-wrapper"
+      v-if="profileMusic"
+      class="profile-music-row"
     >
-      <iframe
-        :key="profileMusic.video_id"
-        :src="youtubeUrl"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
+      <!-- 왼쪽: 프로필 뮤직 -->
+      <div class="profile-music-card">
+        <img
+          :src="profileMusic.image"
+          class="img-cover profile-music-cover"
+        />
+
+        <div class="profile-music-info">
+          <p class="label">🎵 프로필 뮤직</p>
+          <p class="title">{{ profileMusic.track_name }}</p>
+          <p class="artist">
+            {{ profileMusic.artist.map(a => a.name).join(', ') }}
+          </p>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 유튜브 카드 -->
+      <YoutubeTrackCard
+        :track="profileMusic"
+        title="🎬 뮤직 비디오"
+        class="youtube-side"
+      />
     </div>
+
+    <!-- <pre style="background:#eee; padding:10px;">
+    {{ profileMusic }}
+    </pre> -->
 
 
     <!-- 🔹 Profile Card -->
@@ -71,8 +66,6 @@
   <div v-else class="text-center mt-5">
     <p>유저 정보를 불러오는 중입니다...</p>
   </div>
-
-  
 </template>
 
 <script setup>
@@ -83,27 +76,13 @@
   // Pinia state를 반응성 유지한 채로 구조 분해위해 사용
   import { storeToRefs } from 'pinia'
   import { useAccountStore } from '@/stores/accounts'
-  import { ref, computed, onMounted } from 'vue'
+  import { onMounted } from 'vue'
+  import YoutubeTrackCard from '@/components/YoutubeTrackCard.vue'
   
 
   const accountStore = useAccountStore()
   const { user } = storeToRefs(accountStore)
   const { profileMusic } = storeToRefs(accountStore)
-
-  const showPlayer = ref(false)
-
-  const youtubeUrl = computed(() => {
-    if (!profileMusic.value?.video_id) return ''
-    return `https://www.youtube.com/embed/${profileMusic.value.video_id}?autoplay=1`
-  })
-
-  const playMusic = () => {
-    showPlayer.value = false
-    setTimeout(() => {
-      showPlayer.value = true
-    }, 0)
-  }
-
 
   // 새로고침 대응
   onMounted(() => {
@@ -115,17 +94,38 @@
 </script>
 
 <style scoped>
-/* 프로필 뮤직 카드 */
+/* ===== 프로필 뮤직 가로 배치 ===== */
+.profile-music-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+  margin-bottom: 36px;
+  align-items: stretch;
+}
+
+/* 왼쪽 카드 */
 .profile-music-card {
   display: flex;
   align-items: center;
   gap: 18px;
   padding: 18px 22px;
-  margin-bottom: 28px;
   border-radius: 20px;
   background: linear-gradient(135deg, #f7f7ff, #eef2ff);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
 }
+
+/* 오른쪽 유튜브 영역 */
+.youtube-side {
+  align-self: stretch;
+}
+
+/* 모바일 대응 */
+@media (max-width: 900px) {
+  .profile-music-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* 이미지 */
 .profile-music-cover {
@@ -161,18 +161,4 @@
   font-size: 0.85rem;
   color: #666;
 }
-
-/* 유튜브 */
-.youtube-wrapper {
-  margin-bottom: 30px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-}
-
-.youtube-wrapper iframe {
-  width: 100%;
-  height: 315px;
-}
-
 </style>
