@@ -9,6 +9,7 @@ import time
 from pprint import pprint
 import random
 from openai import OpenAI
+import requests
 
 load_dotenv()
 
@@ -55,7 +56,8 @@ def extract_artist(user_input):
                     - 철자 수정이나 변형 없이 그대로 사용한다.
                     3. 그룹/밴드명도 동일한 기준으로 적용한다.
                     4. Spotify에 아티스트로 등록되지 않았을 가능성이 높다면 제외한다.
-                    5. 확신할 수 없는 경우에도 임의 생성하지 말고 제외한다.
+                    5. 문장이 아닌 단어만 입력되어도, 그것이 가수 이름이라면 해당 단어를 기반으로 추론한다.
+                    6. 확신할 수 없는 경우에도 임의 생성하지 말고 제외한다.
 
                     [출력 형식 제약]
                     - 반드시 JSON **단일 객체**만 출력한다.
@@ -72,21 +74,17 @@ def extract_artist(user_input):
                     }
 
                     [예시]
-                    입력: ["정승환", "아이유", "볼빨간사춘기"]
-                    출력:
-                    {
-                        "artists": [
-                            {"original": "정승환", "english": "Jung Seung Hwan"},
-                            {"original": "아이유", "english": "IU"},
-                            {"original": "볼빨간사춘기", "english": "Bol4"}
-                        ]
-                    }
+                    입력: "정승환"
+                    출력: { "artists": [{"original": "정승환", "english": "Jung Seung Hwan"}] }
 
-                    [예외 처리]
-                    - 가수가 한 명도 없으면 다음과 같이 반환한다:
-                    {
-                        "artists": []
-                    }
+                    입력: "블랙핑크 노래 추천해줘"
+                    출력: { "artists": [{"original": "블랙핑크", "english": "BLACKPINK"}] }
+
+                    입력: "아이유랑 뉴진스 알려줘"
+                    출력: { "artists": [{"original": "아이유", "english": "IU"}, {"original": "뉴진스", "english": "NewJeans"}] }
+
+                    입력: "점심 메뉴 추천해줘"
+                    출력: { "artists": [] }
                 """
             },
             {
@@ -117,7 +115,7 @@ def get_top_10_tracks(artist_id):
         top_tracks.append({
             'track_name': track['name'],
             'artist_name': track['artists'][0]['name'],
-            'artist_id': track['artists'][0]['id'],
+            'artist_id': [artist['id'] for artist in track['artists']],
             'track_id': track['id'],
             'album_image': track['album']['images'][0]['url'] if track['album']['images'] else None,
             'release_date': track['album']['release_date'],
@@ -125,6 +123,24 @@ def get_top_10_tracks(artist_id):
         })
         
     return top_tracks
+
+
+def get_video_id(query):
+    api_key = os.getenv("YOUTUBE_API_KEY")
+    url = "https://www.googleapis.com/youtube/v3/search"
+    params = {
+        'key': api_key,
+        'part': 'snippet',
+        'q': query,
+        'type': 'video',
+        'maxResults': 1
+    }
+    response = requests.get(url, params=params).json()
+
+    try:
+        return response['items'][0]['id']['videoId']
+    except (IndexError, KeyError):
+        return None
 
 
 # def update_spotify_tracks_artist_genre():

@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated # 인증된 사용자만 허용
 from .models import Artist, Genre, Track
-from .utils import extract_artist, get_artist, get_top_10_tracks
+from .utils import extract_artist, get_artist, get_top_10_tracks, get_video_id
 import json
-from .serializers import TrackSerializer, FavTrackSerializer
+from .serializers import TrackSerializer, FavTrackSerializer, LatestFavTrackSerializer, FavTrackSaveSerializer
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
@@ -106,33 +106,44 @@ def search(request):
 def fav_save(request):
     track_data = request.data.get('track')
 
-    if request.method == 'POST':
-        if not track_data:
-            return Response({"error": "데이터가 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+    if not track_data:
+        return Response({"error": "데이터가 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
 
-        # 시리얼라이저에 데이터를 넣고 검증
-        serializer = TrackSerializer(data=track_data)
+    # 시리얼라이저에 데이터를 넣고 검증
+    serializer = FavTrackSaveSerializer(data=track_data)
 
-        if serializer.is_valid():
-            # 중복 방지를 위해 get_or_create 활용
-            track, created = Track.objects.get_or_create(
-                track_id = serializer.validated_data.get('track_id'),
-                defaults=serializer.validated_data
-            )
+    if serializer.is_valid():
 
-            # 가수 연결
-            artist_id = track_data.get('artist_id')
-            if artist_id:
-                artist, _ = Artist.objects.get_or_create(name=artist_id)
-                track.artist.add(artist)
-            
-            # 3. 좋아요 추가
-            track.favorited_by.add(request.user)
-            
-            return Response({"message": "좋아요"}, status=status.HTTP_201_CREATED)
+        # 중요: request.data가 아닌 serializer.validated_data를 사용하세요!
+        v_data = serializer.validated_data
+        artist_ids = v_data.get('artist_id') # 이제 여기서 데이터가 나옵니다.
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # 트랙 생성/조회
+        track, created = Track.objects.get_or_create(
+            track_id=v_data.get('track_id'),
+            defaults={
+                'track_name': v_data.get('track_name'),
+                'release_date_text': v_data.get('release_date_text'),
+                'release_year': v_data.get('release_year'),
+                'track_image_link': v_data.get('track_image_link'),
+            }
+        )
+
+        print(track_data)
+
+        # 아티스트 연결 로직
+        if artist_ids:
+            for aid in artist_ids:
+                artist, _ = Artist.objects.get_or_create(artist_id=aid.strip())
+                track.artist.add(artist)
+
+        # 3. 좋아요 추가
+        track.favorited_by.add(request.user)
+        
+        return Response({"message": "좋아요"}, status=status.HTTP_201_CREATED)
     
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 def fav_get(request, user_pk):
@@ -153,3 +164,32 @@ def fav_get(request, user_pk):
     # 페이지 데이터가 없는 경우의 기본 응답
     serializer = FavTrackSerializer(tracks, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def fav_latest(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    latest_track = user.favorite_tracks.order_by('-id').prefetch_related('artist').first()
+
+    if not latest_track:
+        return Response({"message": "좋아요한 트랙이 없습니다."}, status=404)
+    
+    # 유튜브 id가 db에 없다면 검색
+    if not latest_track.video_id:
+        # 유튜브 검색어 생성
+        artist_name = " ".join(latest_track.artist.all().values_list('name', flat=True))
+        search_query = f"{artist_name} {latest_track.track_name} official mv"
+    
+        video_id = get_video_id(search_query)
+
+        if video_id:
+            latest_track.video_id = video_id
+            latest_track.save()
+
+        else:
+            return Response({"message": "비디오를 찾을 수 없습니다."}, status=404)
+    
+    serializer = LatestFavTrackSerializer(latest_track)
+    return Response(serializer.data, status=200)
+
+    
