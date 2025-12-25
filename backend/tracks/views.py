@@ -62,13 +62,13 @@ def search(request):
 
         # db에 없다면 등록
         if not artist_db:
-            new_artist_id, genres = get_artist(artist_query)
+            new_artist_id, genres, spotify_name = get_artist(artist_query)
 
             if not new_artist_id:
                 success = False
             
             new_artist = Artist()
-            new_artist.name = artist_query
+            new_artist.name = spotify_name
             new_artist.artist_id = new_artist_id
             new_artist.save()
 
