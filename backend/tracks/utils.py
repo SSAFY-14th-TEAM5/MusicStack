@@ -37,54 +37,51 @@ def extract_artist(user_input):
             {
                 "role": "developer",
                 "content": """
-                    너는 Spotify API 검색 최적화를 위한 아티스트 이름 정규화 도우미야.
+                너는 Spotify API 검색을 위한 '아티스트 이름 추출' 도우미야.
 
-                    다음 규칙을 반드시 지켜서 아티스트 이름을 변환해줘.
+                입력 문장에서 아티스트(가수/그룹/밴드) 이름만 찾아서 반환해.
+                아티스트 이름을 번역/로마자 변환/추론해서 바꾸지 말고, 입력에 등장한 표기를 최대한 그대로 유지해.
 
-                    [역할]
-                    - 입력된 가수 이름이 한국어일 경우,
-                    Spotify에서 실제로 가장 많이 사용되고 검색 성공률이 높은
-                    **공식 영문 활동명(stage name 또는 등록명)**을 추론해서 반환한다.
+                [추출 규칙]
+                1) 입력에 아티스트 이름이 한국어로 등장하면, '한국어 표기 그대로' 반환한다.
+                - 예: "블랙핑크 노래 추천해줘" -> "블랙핑크"
+                - 예: "아이유랑 뉴진스" -> "아이유", "뉴진스"
+                2) 입력에 아티스트 이름이 영어/라틴 문자로 등장하면, 철자 수정 없이 그대로 반환한다.
+                - 예: "Taylor Swift top10" -> "Taylor Swift"
+                - 예: "coldplay" -> "coldplay" (수정 금지)
+                3) 아티스트가 확실하지 않으면 포함하지 않는다.
+                4) 입력에 아티스트가 없으면 빈 배열을 반환한다.
+                5) 임의로 새로운 아티스트명을 생성하거나 추측하지 않는다.
 
-                    [변환 규칙]
-                    1. 한국어 이름 → Spotify 기준 공식 영문 활동명
-                    - 실명 기반 활동명: 표준 로마자 표기 또는 실제 Spotify 등록명 우선
-                        (예: 정승환 → Jung Seung Hwan)
-                    - 예명/약칭/브랜드형 이름: Spotify에서 통용되는 대표 영문명 사용
-                        (예: 아이유 → IU, 볼빨간사춘기 → Bol4)
-                    2. 영문 이름이 이미 입력된 경우:
-                    - 철자 수정이나 변형 없이 그대로 사용한다.
-                    3. 그룹/밴드명도 동일한 기준으로 적용한다.
-                    4. Spotify에 아티스트로 등록되지 않았을 가능성이 높다면 제외한다.
-                    5. 문장이 아닌 단어만 입력되어도, 그것이 가수 이름이라면 해당 단어를 기반으로 추론한다.
-                    6. 확신할 수 없는 경우에도 임의 생성하지 말고 제외한다.
+                [출력 형식 제약]
+                - 반드시 JSON 단일 객체만 출력한다.
+                - 설명/주석/마크다운/추가 텍스트를 절대 포함하지 않는다.
+                - 결과 형식은 아래와 정확히 일치해야 한다.
 
-                    [출력 형식 제약]
-                    - 반드시 JSON **단일 객체**만 출력한다.
-                    - 설명, 주석, 텍스트, 마크다운을 절대 포함하지 않는다.
-                    - 결과 형식은 아래와 정확히 일치해야 한다.
-
+                {
+                "artists": [
                     {
-                        "artists": [
-                            {
-                            "original": "원본 이름",
-                            "english": "Spotify 검색용 공식 영문명"
-                            }
-                        ]
+                    "original": "원본에서 추출한 아티스트명",
+                    "query": "Spotify 검색에 사용할 문자열(원본 표기 그대로)"
                     }
+                ]
+                }
 
-                    [예시]
-                    입력: "정승환"
-                    출력: { "artists": [{"original": "정승환", "english": "Jung Seung Hwan"}] }
+                [예시]
+                입력: "정승환"
+                출력: {"artists":[{"original":"정승환","query":"정승환"}]}
 
-                    입력: "블랙핑크 노래 추천해줘"
-                    출력: { "artists": [{"original": "블랙핑크", "english": "BLACKPINK"}] }
+                입력: "블랙핑크 노래 추천해줘"
+                출력: {"artists":[{"original":"블랙핑크","query":"블랙핑크"}]}
 
-                    입력: "아이유랑 뉴진스 알려줘"
-                    출력: { "artists": [{"original": "아이유", "english": "IU"}, {"original": "뉴진스", "english": "NewJeans"}] }
+                입력: "아이유랑 뉴진스 알려줘"
+                출력: {"artists":[{"original":"아이유","query":"아이유"},{"original":"뉴진스","query":"뉴진스"}]}
 
-                    입력: "점심 메뉴 추천해줘"
-                    출력: { "artists": [] }
+                입력: "Taylor Swift 추천"
+                출력: {"artists":[{"original":"Taylor Swift","query":"Taylor Swift"}]}
+
+                입력: "점심 메뉴 추천해줘"
+                출력: {"artists":[]}
                 """
             },
             {
@@ -98,14 +95,14 @@ def extract_artist(user_input):
 
 
 def get_artist(artist_name):
-    results = sp.search(q='artist:' + artist_name, type='artist', limit=1, market='KR')
+    results = sp.search(q=artist_name, type='artist', limit=1, market='KR')
     items = results['artists']['items']
     
     if len(items) > 0:
         artist = items[0]
         return artist['id'], artist['genres']
     
-    return None
+    return None, []
 
 
 def get_top_10_tracks(artist_id):
