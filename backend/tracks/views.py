@@ -228,6 +228,32 @@ def fav_latest(request, user_pk):
     serializer = LatestFavTrackSerializer(latest_track)
     return Response(serializer.data, status=200)
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def fav_delete(request):
+    track_id = request.data.get('track_id')
+
+    if not track_id:
+        return Response(
+            {"error": "track_id가 필요합니다."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    track = Track.objects.filter(track_id=track_id).first()
+    if not track:
+        return Response(
+            {"error": "트랙을 찾을 수 없습니다."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    # 좋아요 취소
+    track.favorited_by.remove(request.user)
+
+    return Response(
+        {"message": "좋아요 취소"},
+        status=status.HTTP_200_OK
+    )
+
     
 @api_view(['POST'])
 def recommend(request, user_pk):

@@ -45,7 +45,9 @@ export const useFavoriteStore = defineStore('favorite', () => {
       track_image_link: track.album_image,    // album_image → track_image_link
       release_date_text: track.release_date,  // release_date → release_date_text
       release_year: track.release_year,                   
-      artist_id: track.artist_id ? [...track.artist_id] : [],        // views.py에서 artist_name을 따로 읽고 있으니 보내주기 
+      // artist_id: track.artist_id ? [...track.artist_id] : [],        // views.py에서 artist_name을 따로 읽고 있으니 보내주기 
+      //  artist_id 제거 (중요)
+      artist_id: [],
     }
 
     console.log(payloadTrack)
@@ -107,6 +109,37 @@ export const useFavoriteStore = defineStore('favorite', () => {
     if (likedTracksCount.value > 0) likedTracksCount.value--
   }
 
+  // 좋아요 삭제
+  const deleteFavorite = async (trackId) => {
+    const accountStore = useAccountStore()
+    if (!accountStore.token) return
+
+    try {
+      await axios.delete(
+        `${API_URL}/fav/delete/`,
+        {
+          headers: {
+            Authorization: `Token ${accountStore.token}`,
+          },
+          data: {
+            track_id: trackId,
+          },
+        }
+      )
+
+      // 서버 성공 후 로컬 상태 반영
+      favorites.value = favorites.value.filter(
+        fav => fav.track_id !== trackId
+      )
+
+      decrementCount()
+    } catch (err) {
+      console.error(err)
+      alert('좋아요 취소 실패')
+    }
+  }
+
+
   return {
     favorites,
     loading,
@@ -117,6 +150,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
     likedTracksCount, 
     fetchLikedCount,
     incrementCount,
-    decrementCount
+    decrementCount,
+    deleteFavorite,
   }
 }, { persist: true })
