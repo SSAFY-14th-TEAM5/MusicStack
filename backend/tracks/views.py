@@ -251,3 +251,12 @@ def recommend(request, user_pk):
 
     return Response(ai_response)
 
+@api_view(['GET'])
+def get_fav_count(request):
+    user = request.user
+
+    total_count = user.favorite_tracks.all().count()
+    
+    return Response({
+        'count': total_count
+    })
