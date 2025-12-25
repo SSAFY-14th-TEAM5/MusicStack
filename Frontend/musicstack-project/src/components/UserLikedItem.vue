@@ -102,6 +102,7 @@ h2 {
 
 /* 프로필 뮤직 버튼 */
 .profile-btn {
+  margin-bottom: 36px;
   width: 100%;
   padding: 16px 0;
   border-radius: 30px;
