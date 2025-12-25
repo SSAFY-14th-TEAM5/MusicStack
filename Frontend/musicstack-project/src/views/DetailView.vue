@@ -4,9 +4,9 @@
       <h2 class="detail-title">{{ article.title }}</h2>
 
       <div class="detail-meta">
-        <span>작성일 {{ article.created_at }}</span>
+        <span>작성일 {{ formatDate(article.created_at) }}</span>
         <span v-if="article.updated_at">
-          · 수정 {{ article.updated_at }}
+          · 수정 {{ formatDate(article.updated_at) }}
         </span>
       </div>
 
@@ -137,6 +137,22 @@ const loadComments = () => {
 onMounted(() => {
   loadComments()
 })
+
+// 날짜 포맷 함수 추가
+const formatDate = (isoString) => {
+  if (!isoString) return ''
+
+  const date = new Date(isoString)
+
+  return new Intl.DateTimeFormat('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
+}
+
 </script>
 
 <style scoped>

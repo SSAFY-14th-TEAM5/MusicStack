@@ -15,7 +15,7 @@
     <!-- 일반 보기 -->
     <div v-else>
       <p class="comment-content">{{ comment.content }}</p>
-      <small class="comment-date">{{ comment.created_at }}</small>
+      <small class="comment-date">{{ formatDate(comment.created_at) }}</small>
 
       <div v-if="isAuthor" class="comment-actions">
         <button class="edit-btn" @click="startEdit">수정</button>
@@ -71,6 +71,22 @@ const removeComment = () => {
     .then(() => emit('updated'))
     .catch(err => console.log(err))
 }
+
+// 날짜 포맷 함수
+const formatDate = (isoString) => {
+  if (!isoString) return ''
+
+  const date = new Date(isoString)
+
+  return new Intl.DateTimeFormat('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
+}
+
 </script>
 
 
