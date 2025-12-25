@@ -53,31 +53,35 @@ const submitData = function () {
 <style scoped>
 /* 전체 페이지 */
 .create-page {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 60px 24px 100px;
+  min-height: 100vh;
 }
 
 /* 페이지 제목 */
 .page-title {
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 36px;
-  color: #222;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  color: #D4FF00;
 }
 
 /* 폼 카드 */
 .create-form {
-  background: #ffffff;
-  padding: 36px 32px 40px;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 44px 40px 48px;
+  border-radius: 24px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
 }
 
 /* 입력 그룹 */
 .form-group {
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 /* 라벨 */
@@ -85,64 +89,72 @@ label {
   display: block;
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #444;
+  margin-bottom: 10px;
+  color: #a0a0a0;
 }
 
 /* input, textarea 공통 */
 input,
 textarea {
   width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #ffffff;
   font-size: 0.95rem;
   outline: none;
   resize: none;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #555555;
 }
 
 /* textarea 높이 */
 textarea {
-  min-height: 160px;
+  min-height: 180px;
 }
 
 /* 포커스 효과 */
 input:focus,
 textarea:focus {
-  border-color: #6a11cb;
-  box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.15);
+  border-color: #D4FF00;
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
 }
 
 /* 제출 버튼 */
 .submit-btn {
   width: 100%;
-  margin-top: 10px;
-  padding: 14px 0;
-  border-radius: 28px;
+  margin-top: 16px;
+  padding: 16px 0;
+  border-radius: 32px;
   border: none;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  font-size: 0.95rem;
+  background: #D4FF00;
+  color: #0a0a0a;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 /* 버튼 hover */
 .submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  background: #E6FF33;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(212, 255, 0, 0.3);
 }
 
 /* 모바일 대응 */
 @media (max-width: 480px) {
   .create-form {
-    padding: 28px 20px 32px;
+    padding: 32px 24px 36px;
   }
 
   .page-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 }
 

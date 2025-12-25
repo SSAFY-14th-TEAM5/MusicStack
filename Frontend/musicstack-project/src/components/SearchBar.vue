@@ -50,31 +50,62 @@ const submitSearch = () => {
 <style scoped>
 .search-box {
   display: flex;
-  background: white;
-  border-radius: 40px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 50px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.6s forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-box:focus-within {
+  border-color: #D4FF00;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 255, 0, 0.2);
 }
 
 .search-box input {
   flex: 1;
-  padding: 16px 22px;
+  padding: 18px 26px;
   border: none;
   outline: none;
   font-size: 1rem;
+  background: transparent;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+}
+
+.search-box input::placeholder {
+  color: #666666;
 }
 
 .search-box button {
-  padding: 0 28px;
+  padding: 0 32px;
   border: none;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  background: #D4FF00;
+  color: #0a0a0a;
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: all 0.25s ease;
+  font-family: 'Outfit', sans-serif;
 }
 
 .search-box button:hover {
-  opacity: 0.9;
+  background: #E6FF33;
+  padding: 0 36px;
+  box-shadow: 0 0 30px rgba(212, 255, 0, 0.4);
 }
 </style>

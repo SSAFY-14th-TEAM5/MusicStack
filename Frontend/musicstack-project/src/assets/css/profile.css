@@ -1,60 +1,150 @@
-/* 상단 프로필 카드 */
+/* ================================================
+   MUSIC STACK - 프로필 스타일
+   다크 테마 + 형광 노란색 포인트
+   ================================================ */
+
+/* ===== 상단 프로필 카드 ===== */
 .profile-header {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  border: 1px solid var(--color-border, #2a2a2a);
   color: white;
-  border-radius: 16px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
+/* 프로필 헤더 글로우 효과 */
+.profile-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(212, 255, 0, 0.08) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* 프로필 아바타 */
 .profile-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, #D4FF00, #a8cc00);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
   font-weight: bold;
+  color: #0a0a0a;
+  box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
+/* ===== 섹션 카드 ===== */
 .section-card {
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
 }
 
-/* 공통 트랜지션 */
+/* 카드/섹션 공통 트랜지션 */
 .card,
 .section-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .profile-header:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 255, 0, 0.1);
 }
 
 .section-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+  border-color: rgba(212, 255, 0, 0.3);
 }
 
+/* 섹션 제목 호버 효과 */
 h5 {
   transition: color 0.2s ease;
+  color: #ffffff;
 }
 
 .section-card:hover h5 {
-  color: #4318b0;
+  color: #D4FF00;
 }
 
+/* ===== 버튼 스타일 ===== */
 .mdb-btn {
-  background-color: #2575fc;
-  color: white;
+  background: #D4FF00;
+  color: #0a0a0a;
   border-radius: 24px;
-  padding: 8px 20px;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 10px 24px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .mdb-btn:hover {
-  background-color: #1a5fd0;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+  background: #E6FF33;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 255, 0, 0.4);
+}
+
+.mdb-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== 프로필 정보 텍스트 ===== */
+.profile-header h4 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.profile-header small {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.profile-header hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 12px 0;
+}
+
+/* ===== 섹션 아이콘 스타일 ===== */
+.section-card h5 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== 레이블 스타일 ===== */
+.label-accent {
+  color: #D4FF00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===== 프로필 뮤직 관련 ===== */
+.profile-music-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212, 255, 0, 0.1);
+  color: #D4FF00;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
