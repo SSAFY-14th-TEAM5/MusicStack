@@ -10,7 +10,7 @@ class Track(models.Model):
     release_date_text = models.CharField(max_length=10, null=True, blank=True)
     release_year = models.IntegerField(null=True, blank=True)
     track_image_link = models.URLField()
-    video_id = models.CharField(max_length=50, unique=True, null=True, blank=True)
+    video_id = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.track_name
