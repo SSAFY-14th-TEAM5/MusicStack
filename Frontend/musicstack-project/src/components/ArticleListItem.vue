@@ -34,33 +34,55 @@
 <style scoped>
 /* 카드 전체 */
 .article-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 22px 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 18px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
 }
 
 /* hover 효과 */
 .article-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  border-color: rgba(212, 255, 0, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 255, 0, 0.05);
+}
+
+/* 헤더 */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 /* 제목 */
 .title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 10px;
-  color: #222;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 댓글 카운트 */
+.comment-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #666666;
+  background: #252525;
+  padding: 4px 10px;
+  border-radius: 12px;
 }
 
 /* 내용 미리보기 */
 .content {
   font-size: 0.9rem;
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 16px;
+  color: #888888;
+  line-height: 1.6;
+  margin-bottom: 18px;
 
   /* 2줄까지만 표시 */
   display: -webkit-box;
@@ -79,19 +101,23 @@
 .detail-link {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #6a11cb;
+  color: #D4FF00;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .detail-link:hover {
-  color: #2575fc;
+  color: #E6FF33;
+  gap: 8px;
 }
 
 /* 모바일 대응 */
 @media (max-width: 480px) {
   .article-card {
-    padding: 18px 16px;
+    padding: 20px 18px;
   }
 
   .title {

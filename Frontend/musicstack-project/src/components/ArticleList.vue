@@ -21,6 +21,6 @@
 .article-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 </style>

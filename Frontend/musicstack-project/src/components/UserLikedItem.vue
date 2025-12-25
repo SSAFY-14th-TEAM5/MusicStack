@@ -68,59 +68,63 @@ const setAsProfileMusic = () => {
 
 <style scoped>
 .track-detail {
-  max-width: 420px;
+  max-width: 460px;
   margin: 60px auto;
-  padding: 28px 24px 32px;
-  background: #fff;
-  border-radius: 20px;
+  padding: 36px 32px 40px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
 }
 
 /* 앨범 이미지 */
 .cover {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
 }
 
 /* 제목 */
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  margin: 12px 0 6px;
-  color: #222;
+  margin: 16px 0 8px;
+  color: #ffffff;
 }
 
 /* 아티스트 */
 .artist {
   font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 22px;
+  color: #888888;
+  margin-bottom: 28px;
 }
 
 /* 프로필 뮤직 버튼 */
 .profile-btn {
   width: 100%;
-  padding: 14px 0;
-  border-radius: 26px;
+  padding: 16px 0;
+  border-radius: 30px;
   border: none;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: #fff;
-  font-size: 0.95rem;
+  background: #D4FF00;
+  color: #0a0a0a;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .profile-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  background: #E6FF33;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(212, 255, 0, 0.3);
 }
 
 /* 로딩 상태 */
 .loading {
-  margin-top: 80px;
+  margin-top: 100px;
   text-align: center;
-  color: #777;
+  color: #666666;
   font-size: 0.95rem;
 }
 </style>
