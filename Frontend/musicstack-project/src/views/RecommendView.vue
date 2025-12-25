@@ -34,11 +34,11 @@
       <div v-if="recommendations && !isLoading" class="results-box">
         <h3>✨ AI 추천 결과</h3>
         <div class="song-list">
-          <div v-for="(song, index) in recommendations" :key="index" class="song-card">
+          <div v-for="(song, index) in recommendations.recommended" :key="index" class="song-card">
             <div class="song-info">
               <span class="rank">{{ index + 1 }}</span>
               <div class="text">
-                <p class="title">{{ song.title }}</p>
+                <p class="title">{{ song.track }}</p>
                 <p class="artist">{{ song.artist }}</p>
               </div>
             </div>
