@@ -24,12 +24,13 @@ sp._session.headers.update({
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
 })
 
+client = OpenAI(
+    api_key = os.getenv("GMS_KEY"),
+    base_url = "https://gms.ssafy.io/gmsapi/api.openai.com/v1"
+)
+
 
 def extract_artist(user_input):
-    client = OpenAI(
-        api_key = os.getenv("GMS_KEY"),
-        base_url = "https://gms.ssafy.io/gmsapi/api.openai.com/v1"
-    )
 
     response = client.chat.completions.create(
         model="gpt-5-mini",
@@ -138,6 +139,57 @@ def get_video_id(query):
         return response['items'][0]['id']['videoId']
     except (IndexError, KeyError):
         return None
+
+
+def recommend_music(fav_musics):
+    payload = {"liked_tracks": fav_musics}
+
+    response = client.chat.completions.create(
+        model="gpt-5.2",
+        temperature=0.3,
+        messages=[
+            {
+                "role": "developer",
+                "content": """
+                    liked_tracks는 아래 형식의 배열이다:
+                    [
+                        {"track":"곡명","artist":"아티스트","genres":["..."] (선택)}
+                    ]
+
+                    너는 음악 추천 시스템이다.
+                    입력된 liked_tracks의 분위기/장르/아티스트 성향을 요약하고, 비슷한 곡을 5개 추천해라.
+
+                    규칙:
+                    - 좋아하는 곡 목록을 기반으로 추천해라.
+                    - 존재하지 않는 곡/아티스트를 만들어내지 마라.
+                    - 결과는 반드시 JSON만 출력한다(설명/마크다운 금지).
+                    - 추천은 (track, artist) 형태로만 제시한다.
+                    - liked_tracks에 있는 곡은 추천 목록에서 제외한다.
+                    - reason은 20자 이내로 작성한다.
+
+                    출력 형식:
+                    {
+                    "taste_summary": "한 문장 요약",
+                    "recommended": [
+                        {"track": "곡명", "artist": "아티스트", "reason": "짧은 이유"}
+                    ]
+                    }
+                """
+            },
+            {
+                "role": "user",
+                "content": json.dumps(payload, ensure_ascii=False)
+            }
+        ]
+    )
+
+    content = response.choices[0].message.content.strip()
+    try:
+        return json.loads(content)
+    except:
+        return {"taste_summary": "", "recommended": []}
+
+
 
 
 # def update_spotify_tracks_artist_genre():

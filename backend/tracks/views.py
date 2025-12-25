@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated # 인증된 사용자만 허용
 from .models import Artist, Genre, Track
-from .utils import extract_artist, get_artist, get_top_10_tracks, get_video_id
+from .utils import extract_artist, get_artist, get_top_10_tracks, get_video_id, recommend_music
 import json
 from .serializers import TrackSerializer, FavTrackSerializer, LatestFavTrackSerializer, FavTrackSaveSerializer
 from rest_framework.pagination import PageNumberPagination
@@ -229,3 +229,25 @@ def fav_latest(request, user_pk):
     return Response(serializer.data, status=200)
 
     
+@api_view(['POST'])
+def recommend(request, user_pk):
+    # user = request.user
+    user = get_object_or_404(User, pk=user_pk)
+    fav_tracks = user.favorite_tracks.prefetch_related('artist').order_by('-id')[:30]
+
+    liked_tracks = []
+    for t in fav_tracks:
+        # 1. 이 트랙에 연결된 모든 가수의 '이름'만 리스트로 추출
+        names = [artist.name for artist in t.artist.all()]
+        
+        # 2. 리스트에 담기
+        liked_tracks.append({
+            "track": t.track_name, # 모델 필드명이 track_name인지 title인지 확인!
+            "artist": ", ".join(names), # 여러 명일 경우 "가수1, 가수2"로 합침
+        })
+
+    # 함수 호출
+    ai_response = recommend_music(liked_tracks)
+
+    return Response(ai_response)
+
