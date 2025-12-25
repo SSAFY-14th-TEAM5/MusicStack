@@ -45,12 +45,6 @@
     {{ profileMusic }}
     </pre> -->
 
-    <!-- 🔹 Recommend Section -->
-    <div class="card section-card p-4 mb-4">
-      <h5 class="fw-bold mb-3">🎧 추천 음악</h5>
-      <UserRecommend />
-    </div>
-
     <!-- 🔹 UserLikedList Section -->
     <div class="card section-card p-4">
       <h5 class="fw-bold mb-3">❤️ 내가 좋아요한 노래</h5>
@@ -65,7 +59,7 @@
 </template>
 
 <script setup>
-  import UserRecommend from '@/components/UserRecommend.vue'
+  // import UserRecommend from '@/components/UserRecommend.vue'
   // import UserLiked from '@/components/UserLiked.vue'
   import UserLikedList from '@/components/UserLikedList.vue'
   import { RouterView } from 'vue-router'
