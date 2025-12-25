@@ -108,6 +108,8 @@ def search(request):
                 video_id = get_video_id(search_query)
                 track["video_id"] = video_id # 찾았으면 id, 못 찾았으면 None
                 
+                print(video_id)
+
                 # 4. 검색 결과를 DB에 반영 (저장)
                 if video_id:
                     if track_obj:
@@ -170,7 +172,11 @@ def fav_save(request):
         # 아티스트 연결 로직
         if artist_ids:
             for aid in artist_ids:
-                artist, _ = Artist.objects.get_or_create(artist_id=aid.strip())
+                artist = Artist.objects.filter(artist_id=aid).first()
+
+                if not artist:
+                    artist = Artist.objects.create(artist_id=aid)
+
                 track.artist.add(artist)
 
         # 3. 좋아요 추가

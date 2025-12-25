@@ -1,0 +1,1447 @@
+[
+{
+    "model": "tracks.track",
+    "pk": 1,
+    "fields": {
+        "track_name": "뛰어(JUMP)",
+        "track_id": "4JjJ1KNRrzqstSY0uDuys3",
+        "release_date_text": "2025-07-11",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2737385601b1612337a142d85f8",
+        "video_id": "CgCVZdcKcqY",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 2,
+    "fields": {
+        "track_name": "Pink Venom",
+        "track_id": "5P3o95Jf0YBQRQ4j2XPpfC",
+        "release_date_text": "2022-09-16",
+        "release_year": 2022,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273580ac3ad7dfc81e509171120",
+        "video_id": "gQlMMD8auMs",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 3,
+    "fields": {
+        "track_name": "Kill This Love",
+        "track_id": "5GK7eDDTVz7CTge1wJrDQW",
+        "release_date_text": "2019-04-05",
+        "release_year": 2019,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2732d602ab2d4acff0c2cf57683",
+        "video_id": "2S24-y0Ij3Y",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 4,
+    "fields": {
+        "track_name": "Shut Down",
+        "track_id": "6tCd8bPvYnceDG7W9M1RMk",
+        "release_date_text": "2022-09-16",
+        "release_year": 2022,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273580ac3ad7dfc81e509171120",
+        "video_id": "POe9SOEKotk",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 5,
+    "fields": {
+        "track_name": "How You Like That",
+        "track_id": "6bvZRLLkBKkmgpBJTTj3QK",
+        "release_date_text": "2020-10-02",
+        "release_year": 2020,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731895052324f123becdd0d53d",
+        "video_id": "ioNng23DkIM",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 6,
+    "fields": {
+        "track_name": "붐바야",
+        "track_id": "13MF2TYuyfITClL1R2ei6e",
+        "release_date_text": "2016-08-08",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273ff4ec21d7817138cabcc19bc",
+        "video_id": "bwmSjveL3Lc",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 7,
+    "fields": {
+        "track_name": "마지막처럼",
+        "track_id": "4ZxOuNHhpyOj4gv52MtQpT",
+        "release_date_text": "2017-06-22",
+        "release_year": 2017,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273ac93d8b1bd84fa6b5291ba21",
+        "video_id": "Amq-qlqbjYA",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 8,
+    "fields": {
+        "track_name": "뚜두뚜두 (DDU-DU DDU-DU)",
+        "track_id": "69BIczdH6QMnFx7dsSssN8",
+        "release_date_text": "2018-06-15",
+        "release_year": 2018,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27314d1e0d0aba77339c007ed92",
+        "video_id": "IHNzOHi8sJs",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 9,
+    "fields": {
+        "track_name": "Lovesick Girls",
+        "track_id": "1GMufNnkKAnPLnqKJ5HHxW",
+        "release_date_text": "2020-10-02",
+        "release_year": 2020,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731895052324f123becdd0d53d",
+        "video_id": "dyRsYk0LyA8",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 10,
+    "fields": {
+        "track_name": "Pretty Savage",
+        "track_id": "28tufPkTcXmdNqTvi9hsoG",
+        "release_date_text": "2020-10-02",
+        "release_year": 2020,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731895052324f123becdd0d53d",
+        "video_id": "eCZq1kFw3-Q",
+        "artist": [
+            1
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 11,
+    "fields": {
+        "track_name": "Whiplash",
+        "track_id": "6uPnrBgweGOcwjFL4ItAvV",
+        "release_date_text": "2024-10-21",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273e467a8e8d7b0aa92d354aa75",
+        "video_id": "jWQx2f-CErU",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 12,
+    "fields": {
+        "track_name": "Rich Man",
+        "track_id": "53xn9j8QEj4RBJa1MlYqFy",
+        "release_date_text": "2025-09-05",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273810f7ac94531092b64accd66",
+        "video_id": "5oQVTnq-UKk",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 13,
+    "fields": {
+        "track_name": "Supernova",
+        "track_id": "2VdSktBqFfkW7y6q5Ik4Z4",
+        "release_date_text": "2024-05-27",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2730fc598038040859794c600e2",
+        "video_id": "phuiiNCxRMg",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 14,
+    "fields": {
+        "track_name": "Drama",
+        "track_id": "5XWlyfo0kZ8LF7VSyfS4Ew",
+        "release_date_text": "2023-11-10",
+        "release_year": 2023,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c54e39f2ae0dd10731f93c08",
+        "video_id": "D8VEhcPeSlc",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 15,
+    "fields": {
+        "track_name": "Dirty Work",
+        "track_id": "1ImRS2KtSaDZcj9vQTxwFA",
+        "release_date_text": "2025-06-27",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273bf35cc79c5b22b1c19065272",
+        "video_id": "M2WTUoy4y6E",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 16,
+    "fields": {
+        "track_name": "Armageddon",
+        "track_id": "5eWcGfUCrVFMoYskyfkEPE",
+        "release_date_text": "2024-05-27",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2730fc598038040859794c600e2",
+        "video_id": "nFYwcndNuOY",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 17,
+    "fields": {
+        "track_name": "GOOD STUFF - KARINA Solo",
+        "track_id": "19iJj3pCMwGxrA6pltPat3",
+        "release_date_text": "2025-11-17",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d31600d1d87b8c8e72f10226",
+        "video_id": "hfO7veqkHns",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 18,
+    "fields": {
+        "track_name": "UP - KARINA Solo",
+        "track_id": "5sjnkOfTLCLNfkkchI2re2",
+        "release_date_text": "2024-10-09",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273253096eda3b7826c11c7fab8",
+        "video_id": "acZ7A5w_kSE",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 19,
+    "fields": {
+        "track_name": "BLUE - WINTER Solo",
+        "track_id": "58awxGcVt7bQ9bahX7yWxt",
+        "release_date_text": "2025-11-17",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d31600d1d87b8c8e72f10226",
+        "video_id": "D5MtRNQBVbk",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 20,
+    "fields": {
+        "track_name": "Ketchup And Lemonade - NINGNING Solo",
+        "track_id": "1D1cBWh7IJ5DqOIYqCtqZa",
+        "release_date_text": "2025-11-17",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d31600d1d87b8c8e72f10226",
+        "video_id": "eET3YAZp4rI",
+        "artist": [
+            2
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 21,
+    "fields": {
+        "track_name": "너였다면",
+        "track_id": "5i6gHFXg4aLK5xvc2jJJC5",
+        "release_date_text": "2016-05-31",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d302508be9a23d452069eaa2",
+        "video_id": "D0_9KxhyJns",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 22,
+    "fields": {
+        "track_name": "Day & Night",
+        "track_id": "0JlYPewyE0Cs5rkUCsWqgy",
+        "release_date_text": "2020-10-18",
+        "release_year": 2020,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273cf0238fbe84fc61e73312929",
+        "video_id": "2dEeiY_w3xE",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 23,
+    "fields": {
+        "track_name": "눈사람",
+        "track_id": "6HgeeiHqVpxxFCB0bjBRT6",
+        "release_date_text": "2018-02-19",
+        "release_year": 2018,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273dec4d6dd3add76484226a051",
+        "video_id": "gPNu9OIj4Zo",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 24,
+    "fields": {
+        "track_name": "너에게 닿을게",
+        "track_id": "2S8mZn8qjT8udtuoCziMPf",
+        "release_date_text": "2023-07-02",
+        "release_year": 2023,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273ed0de74dca80ec6df1549a88",
+        "video_id": "Lxd99QyfDHQ",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 25,
+    "fields": {
+        "track_name": "바람",
+        "track_id": "6pWeveORQ9qaXy64mv5Yi4",
+        "release_date_text": "2016-10-05",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273cd5441e4b9f4ed4fd28ce835",
+        "video_id": "HuPAI3USGOw",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 26,
+    "fields": {
+        "track_name": "Because of You (Would You Marry Me? : Original Television Soundtrack)",
+        "track_id": "7gJiI5P6Djq6mwy2c4rjte",
+        "release_date_text": "2025-11-01",
+        "release_year": 2025,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c5f3b4e7e12a1274d1402b7c",
+        "video_id": "Hke7W2l5ToE",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 27,
+    "fields": {
+        "track_name": "보통의 하루",
+        "track_id": "2RzUXBM4M82BfsGriLx8mk",
+        "release_date_text": "2018-04-05",
+        "release_year": 2018,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d80f705030380a96b92e025c",
+        "video_id": "GRWh711Y_dw",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 28,
+    "fields": {
+        "track_name": "이 바보야",
+        "track_id": "0zj7btS9fZMqZFZWO6fYI9",
+        "release_date_text": "2016-11-29",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2735d6305fa2fd686537a961e7d",
+        "video_id": "ZDhnGA66Eoo",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 29,
+    "fields": {
+        "track_name": "그날 밤",
+        "track_id": "37x2x6UQfUcvbM8NVHRngO",
+        "release_date_text": "2023-11-05",
+        "release_year": 2023,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2736def99b8bc20ab00844c7be1",
+        "video_id": "kxIZIj5EAjA",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 30,
+    "fields": {
+        "track_name": "숨",
+        "track_id": "6XHM5qjDlcJVT1afJZXUId",
+        "release_date_text": "2023-04-29",
+        "release_year": 2023,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27304c8f17d53f61588f77c7819",
+        "video_id": "pAtj1AzCuzs",
+        "artist": [
+            3
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 31,
+    "fields": {
+        "track_name": "All I Want for Christmas Is You",
+        "track_id": "0bYg9bo50gSsH3LtXe2SQn",
+        "release_date_text": "1994-10-28",
+        "release_year": 1994,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c0862332847213b151ffab31",
+        "video_id": "aAkMkVFwAoo",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 32,
+    "fields": {
+        "track_name": "Christmas (Baby Please Come Home)",
+        "track_id": "3PIDciSFdrQxSQSihim3hN",
+        "release_date_text": "1994-10-28",
+        "release_year": 1994,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c0862332847213b151ffab31",
+        "video_id": "uXjEstAk8_E",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 33,
+    "fields": {
+        "track_name": "Obsessed",
+        "track_id": "5EGPf0nqO7vEIwsOX6Er98",
+        "release_date_text": "2009-09-29",
+        "release_year": 2009,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2736ff3f8fd7540eb7447dae564",
+        "video_id": "H1Yt0xJKDY8",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 34,
+    "fields": {
+        "track_name": "We Belong Together",
+        "track_id": "4EI8VuxUuIHKfafU72emqz",
+        "release_date_text": "2005",
+        "release_year": 2005,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273006adc0cc250c8f9c5494aec",
+        "video_id": "0habxsuXW4g",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 35,
+    "fields": {
+        "track_name": "All I Want For Christmas Is You (SuperFestive!) Duet with Mariah Carey",
+        "track_id": "1IUtgwxLYzDVd41EgbKUjX",
+        "release_date_text": "2011-01-01",
+        "release_year": 2011,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273af0aff7f601df9ed6d2d531d",
+        "video_id": "fGFNmEOntFA",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 36,
+    "fields": {
+        "track_name": "Santa Claus Is Comin' to Town",
+        "track_id": "1f2lkuLldqRzvaFjJdjGXX",
+        "release_date_text": "1994-10-28",
+        "release_year": 1994,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c0862332847213b151ffab31",
+        "video_id": "iCiEHrexjvg",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 37,
+    "fields": {
+        "track_name": "Oh Santa! (feat. Ariana Grande & Jennifer Hudson)",
+        "track_id": "2VkuxjlbnbaBiWYpdBGVol",
+        "release_date_text": "2020-12-11",
+        "release_year": 2020,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731e8ba88adaabdc01b6870896",
+        "video_id": "G2bx3FzgJ6o",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 38,
+    "fields": {
+        "track_name": "Fantasy",
+        "track_id": "6xkryXuiZU360Lngd4sx13",
+        "release_date_text": "1995-10-03",
+        "release_year": 1995,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273749e9bfa78277f30ad2c9a9c",
+        "video_id": "qq09UkPRdFY",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 39,
+    "fields": {
+        "track_name": "My All",
+        "track_id": "3RSpK5Y0y5tl25qvssrwJ6",
+        "release_date_text": "1997-09-16",
+        "release_year": 1997,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27398ed501c6a838b2244ebaf75",
+        "video_id": "mIhI23gBBPQ",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 40,
+    "fields": {
+        "track_name": "O Holy Night",
+        "track_id": "3B7FO3kJ5kv3mX7yiaB7sT",
+        "release_date_text": "1994-10-28",
+        "release_year": 1994,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c0862332847213b151ffab31",
+        "video_id": "BEJmP8T07JU",
+        "artist": [
+            4
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 41,
+    "fields": {
+        "track_name": "Underneath the Tree",
+        "track_id": "3nAp4IvdMPPWEH9uuXFFV5",
+        "release_date_text": "2013-10-25",
+        "release_year": 2013,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c87992b7588879f66d192905",
+        "video_id": "EM2Fnp_qnE8",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 42,
+    "fields": {
+        "track_name": "Santa, Can’t You Hear Me",
+        "track_id": "2O3MQ6H3gjrIWDcpeTrikT",
+        "release_date_text": "2021-10-15",
+        "release_year": 2021,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731fa667a7a53c7072fed91a17",
+        "video_id": "PPcpd-YBlGw",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 43,
+    "fields": {
+        "track_name": "Since U Been Gone",
+        "track_id": "6JY1IdkZGeIcPegKxjSKeb",
+        "release_date_text": "2004",
+        "release_year": 2004,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273158c72ad0003cb37ca0c9eff",
+        "video_id": "R7UrFYvl5TE",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 44,
+    "fields": {
+        "track_name": "Under The Mistletoe - Bonus Track",
+        "track_id": "2CYnG4UCBBEKIiux3S0jBU",
+        "release_date_text": "2021-10-15",
+        "release_year": 2021,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731fa667a7a53c7072fed91a17",
+        "video_id": "SgxPUe4dQ74",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 45,
+    "fields": {
+        "track_name": "Because of You",
+        "track_id": "0gJvqi9QyASOCtJu99tytc",
+        "release_date_text": "2004",
+        "release_year": 2004,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273158c72ad0003cb37ca0c9eff",
+        "video_id": "Ra-Om7UMSJc",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 46,
+    "fields": {
+        "track_name": "Stronger (What Doesn't Kill You)",
+        "track_id": "1nInOsHbtotAmEOQhtvnzP",
+        "release_date_text": "2011-10-24",
+        "release_year": 2011,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273af384269742c6b04308c1be8",
+        "video_id": "Xn676-fLq7I",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 47,
+    "fields": {
+        "track_name": "Christmas Isn't Canceled (Just You)",
+        "track_id": "4zHDuDQx8dcWVmVVtyIzRO",
+        "release_date_text": "2021-10-15",
+        "release_year": 2021,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731fa667a7a53c7072fed91a17",
+        "video_id": "7nLU5i5Ec7g",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 48,
+    "fields": {
+        "track_name": "Breakaway",
+        "track_id": "4PFAm88FBkY7IFtvCaGctZ",
+        "release_date_text": "2004",
+        "release_year": 2004,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273158c72ad0003cb37ca0c9eff",
+        "video_id": "c-3vPxKdj6o",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 49,
+    "fields": {
+        "track_name": "Christmas Eve - Bonus Track",
+        "track_id": "53Th3IZ5xqwoETVVEEozdg",
+        "release_date_text": "2021-10-15",
+        "release_year": 2021,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2731fa667a7a53c7072fed91a17",
+        "video_id": "X9liud9wiwQ",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 50,
+    "fields": {
+        "track_name": "You For Christmas",
+        "track_id": "5CjGrNDHZbsMrtpjSvtaNv",
+        "release_date_text": "2024-11-01",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27365a5a69e8e008fd75909f15c",
+        "video_id": "r2cy97hrl_s",
+        "artist": [
+            5
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 51,
+    "fields": {
+        "track_name": "Winter Ahead (with PARK HYO SHIN)",
+        "track_id": "7G7mSV4BebkoHWwKTDvXu9",
+        "release_date_text": "2024-11-29",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27316ba2a3622bd0d0d985e3234",
+        "video_id": "HAWYOuMGkK0",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 52,
+    "fields": {
+        "track_name": "Winter Ahead (with PARK HYO SHIN) : YUNSEOKCHEOL TRIO Ver.",
+        "track_id": "2C39jkUPAsQzwBSshsaCfX",
+        "release_date_text": "2024-12-20",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2737943ad19707eee754abdb693",
+        "video_id": "dCZj7X8MooE",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 53,
+    "fields": {
+        "track_name": "어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+        "track_id": "0hqj5JBnFt1BHEz2UCFwrl",
+        "release_date_text": "2019-09-25",
+        "release_year": 2019,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d41cdd1f3e033a0ea1642112",
+        "video_id": "m3DZsBw5bnE",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 54,
+    "fields": {
+        "track_name": "Love Lee",
+        "track_id": "1qosh64U6CR5ki1g1Rf2dZ",
+        "release_date_text": "2023-08-21",
+        "release_year": 2023,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273a75d7535b8657385f8232449",
+        "video_id": "EIz09kLzN9k",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 55,
+    "fields": {
+        "track_name": "Give Love",
+        "track_id": "2A3ShNautqXezP1lFDePwa",
+        "release_date_text": "2014-04-07",
+        "release_year": 2014,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27378551e802bd7b81d7af67dfb",
+        "video_id": "x2XX3cNW4K0",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 56,
+    "fields": {
+        "track_name": "DINOSAUR",
+        "track_id": "49KDK2ccYnOCYPeXfDO3YT",
+        "release_date_text": "2017-07-20",
+        "release_year": 2017,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2732b0e9f9b2ec8b5cfc24a958b",
+        "video_id": "8Oz7DG76ibY",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 57,
+    "fields": {
+        "track_name": "200%",
+        "track_id": "6qkx0tenDglbF21CU4wa1k",
+        "release_date_text": "2014-04-07",
+        "release_year": 2014,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27378551e802bd7b81d7af67dfb",
+        "video_id": "0Oi8jDMvd_w",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 58,
+    "fields": {
+        "track_name": "오랜 날 오랜 밤",
+        "track_id": "0x50cQ1pZeV4xl737GhKBk",
+        "release_date_text": "2017-01-03",
+        "release_year": 2017,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273c2b47cdd775a9b22f137847d",
+        "video_id": "wEQpfil0IYA",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 59,
+    "fields": {
+        "track_name": "Be With You",
+        "track_id": "7IRZ9aTBu35je2AHT2LxvL",
+        "release_date_text": "2016-10-11",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273136af5b44038501ae3662980",
+        "video_id": "sbr9U-B6s28",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 60,
+    "fields": {
+        "track_name": "후라이의 꿈",
+        "track_id": "6f4CAdAmrOfGH3FOfwHMSV",
+        "release_date_text": "2023-08-21",
+        "release_year": 2023,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273a75d7535b8657385f8232449",
+        "video_id": "3kGAlp_PNUg",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 61,
+    "fields": {
+        "track_name": "낙하 (with 아이유)",
+        "track_id": "4t2FIqZJORKZGSKg30SShr",
+        "release_date_text": "2021-07-26",
+        "release_year": 2021,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b27355d0265cc488deebe40d79a6",
+        "video_id": "EtiPbWzUY9o",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 62,
+    "fields": {
+        "track_name": "밤 끝없는 밤",
+        "track_id": "1Tn3BfNkoQio5yL0ZbO2z8",
+        "release_date_text": "2019-09-25",
+        "release_year": 2019,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d41cdd1f3e033a0ea1642112",
+        "video_id": "F9VV_Rt_nhQ",
+        "artist": [
+            7
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 63,
+    "fields": {
+        "track_name": "Winter Ahead (with PARK HYO SHIN) : Silent Carol Ver.",
+        "track_id": "0KqCs7XM8rsaRg9Kv8PbUa",
+        "release_date_text": "2024-12-03",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d2c098f8557224a8c5863d69",
+        "video_id": "HAWYOuMGkK0",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 64,
+    "fields": {
+        "track_name": "눈의 꽃 - 미안하다, 사랑한다 (Original Television Soundtrack)",
+        "track_id": "2KLL68vmqVDdhL7J9lquMb",
+        "release_date_text": "2008-11-26",
+        "release_year": 2008,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273a96f6560c7e9f8ff05dbf284",
+        "video_id": "nQuUfQB0dSw",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 65,
+    "fields": {
+        "track_name": "Winter Ahead (with PARK HYO SHIN) (Instrumental)",
+        "track_id": "4JoV6ys443Oxx4SUxlA8yt",
+        "release_date_text": "2024-12-03",
+        "release_year": 2024,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d2c098f8557224a8c5863d69",
+        "video_id": "9Zf8gsQ_n9o",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 66,
+    "fields": {
+        "track_name": "야생화",
+        "track_id": "5wQgwLigxPtDwDMMFCu2tV",
+        "release_date_text": "2016-10-03",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d3430c9daa4cf3572627c420",
+        "video_id": "OxgiiyLp5pk",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 67,
+    "fields": {
+        "track_name": "크리스마스니까",
+        "track_id": "1oWe4At8PLglBRAeQVcglM",
+        "release_date_text": "2012-12-06",
+        "release_year": 2012,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273f0494c000b032439883767ea",
+        "video_id": "JkRKxxLiDNI",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 68,
+    "fields": {
+        "track_name": "Goodbye",
+        "track_id": "3QQyaBhRNcDmqpWRssT7dh",
+        "release_date_text": "2019-05-06",
+        "release_year": 2019,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273ede80f85e3454b8eb3ab16f1",
+        "video_id": "Xp8Ep1W-azw",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 69,
+    "fields": {
+        "track_name": "야생화",
+        "track_id": "6tohHT5sQRMjdWHMNn190u",
+        "release_date_text": "2014-03-28",
+        "release_year": 2014,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2737645cbd0f9fefff1771ea50c",
+        "video_id": "OxgiiyLp5pk",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 70,
+    "fields": {
+        "track_name": "숨",
+        "track_id": "7pJcMkVanPZDqWrF7Rxml6",
+        "release_date_text": "2016-10-03",
+        "release_year": 2016,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273d3430c9daa4cf3572627c420",
+        "video_id": "oBKpJiVEcnU",
+        "artist": [
+            6
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 71,
+    "fields": {
+        "track_name": "4 Walls",
+        "track_id": "2YkjXEab4USTV9uuAgC90E",
+        "release_date_text": "2015-10-27",
+        "release_year": 2015,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273b6baf420e67f45971ca0d216",
+        "video_id": "4j7Umwfx60Q",
+        "artist": [
+            8
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 72,
+    "fields": {
+        "track_name": "미행 (그림자: Shadow)",
+        "track_id": "1xbJNPLSTtIWgGTt3Uu4gl",
+        "release_date_text": "2013-07-29",
+        "release_year": 2013,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2736f7d8c9dcc983839bd746dbc",
+        "video_id": "5LrLW-T7D-w",
+        "artist": [
+            8
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 73,
+    "fields": {
+        "track_name": "Electric Shock",
+        "track_id": "7tMN6iGJMulMFpSCeU7pmU",
+        "release_date_text": "2012-06-10",
+        "release_year": 2012,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2735a58accf4805f4097859eeac",
+        "video_id": "n8I8QGFA1oM",
+        "artist": [
+            8
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 74,
+    "fields": {
+        "track_name": "첫 사랑니 (Rum Pum Pum Pum)",
+        "track_id": "22sIPXiQzcPydCC6skPPPq",
+        "release_date_text": "2013-07-29",
+        "release_year": 2013,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b2736f7d8c9dcc983839bd746dbc",
+        "video_id": "xnku4o3tRB4",
+        "artist": [
+            8
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 75,
+    "fields": {
+        "track_name": "Hot Summer",
+        "track_id": "1dyMRzKZMakJqmOnsUUZ9X",
+        "release_date_text": "2011-06-14",
+        "release_year": 2011,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273f968b1985a5f5a5bf655960c",
+        "video_id": "z-rftpZ7kCY",
+        "artist": [
+            8
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.track",
+    "pk": 76,
+    "fields": {
+        "track_name": "Mr. Boogie",
+        "track_id": "2LPHYUPHeYeh4R5Edu7vqI",
+        "release_date_text": "2010-05-04",
+        "release_year": 2010,
+        "track_image_link": "https://i.scdn.co/image/ab67616d0000b273900d10b8f74cbac991333789",
+        "video_id": "muIk-YB_Jls",
+        "artist": [
+            8
+        ],
+        "favorited_by": []
+    }
+},
+{
+    "model": "tracks.genre",
+    "pk": 1,
+    "fields": {
+        "name": "케이팝"
+    }
+},
+{
+    "model": "tracks.genre",
+    "pk": 2,
+    "fields": {
+        "name": "K-발라드"
+    }
+},
+{
+    "model": "tracks.genre",
+    "pk": 3,
+    "fields": {
+        "name": "사운드트랙"
+    }
+},
+{
+    "model": "tracks.genre",
+    "pk": 4,
+    "fields": {
+        "name": "크리스마스"
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 1,
+    "fields": {
+        "name": "BLACKPINK",
+        "artist_id": "41MozSoPIsD1dJM0CLPjZF",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 2,
+    "fields": {
+        "name": "aespa",
+        "artist_id": "6YVMFz59CuY7ngCxTxjpxE",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 3,
+    "fields": {
+        "name": "정승환",
+        "artist_id": "7l8rOFwZFQ3G0sgZ7gjGng",
+        "genre": [
+            2,
+            3
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 4,
+    "fields": {
+        "name": "머라이어 캐리",
+        "artist_id": "4iHNK0tOyZPYnBU7nGAgpQ",
+        "genre": [
+            4
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 5,
+    "fields": {
+        "name": "Kelly Clarkson",
+        "artist_id": "3BmGtnKgCSGYIUhmivXKWX",
+        "genre": [
+            4
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 6,
+    "fields": {
+        "name": "박효신",
+        "artist_id": "57htMBtzpppc1yoXgjbslj",
+        "genre": [
+            2
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 7,
+    "fields": {
+        "name": "AKMU",
+        "artist_id": "6OwKE9Ez6ALxpTaKcT5ayv",
+        "genre": [
+            1,
+            2
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 8,
+    "fields": {
+        "name": "f(x)",
+        "artist_id": "3wRA5UYoo08BBKJnzyKkpF",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 9,
+    "fields": {
+        "name": "",
+        "artist_id": "2CQZr2RPZmrcvDnaod1ldC",
+        "genre": [],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 10,
+    "fields": {
+        "name": "Red Velvet",
+        "artist_id": "1z4g3DjTBBZKhvAroFlhOM",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 11,
+    "fields": {
+        "name": "백아연",
+        "artist_id": "5UKoKVlU7EDN4UgDuVRAbX",
+        "genre": [
+            2,
+            3
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 12,
+    "fields": {
+        "name": "",
+        "artist_id": "34HmvZztvxqAo2mBSAieRe",
+        "genre": [],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 13,
+    "fields": {
+        "name": "동방신기",
+        "artist_id": "6nVMMEywS5Y4tsHPKx1nIo",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 14,
+    "fields": {
+        "name": "",
+        "artist_id": "10hnt5byoob9FKHUN8Awfa",
+        "genre": [],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 15,
+    "fields": {
+        "name": "러블리즈",
+        "artist_id": "3g34PW5oNmDBxMVUTzx2XK",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 16,
+    "fields": {
+        "name": "VIXX",
+        "artist_id": "5BkB3rXc0qIdUtuEnhbK0A",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+},
+{
+    "model": "tracks.artist",
+    "pk": 17,
+    "fields": {
+        "name": "KiiiKiii",
+        "artist_id": "63sat2XSMKdwKfqspmYQKP",
+        "genre": [
+            1
+        ],
+        "followers": []
+    }
+}
+]
