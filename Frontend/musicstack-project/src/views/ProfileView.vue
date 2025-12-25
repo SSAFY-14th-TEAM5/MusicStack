@@ -1,9 +1,6 @@
 <template>
   <div class="profile-page">
-    <!-- <h1>Profile Page</h1> -->
     <MainProfile />
-    <!-- <UserLikedList /> -->
-    <UserRecommendList />
   </div>
 </template>
 

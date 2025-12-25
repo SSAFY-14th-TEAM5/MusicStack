@@ -2,15 +2,18 @@
   <div v-if="user" class="container my-5">
     <!-- 🔹 Profile Card -->
     <div class="card profile-header p-4 mb-4">
-      <div class="d-flex align-items-center">
-        <div class="profile-avatar me-3">
+      <div class="d-flex flex-row align-items-center text-center" style="gap: 20px;">
+        <div class="profile-avatar mb-3">
           {{ user.nickname?.charAt(0) }}
         </div>
         <div>
-          <h4 class="mb-0 fw-bold">닉네임: {{ user.nickname }}</h4>
-          <small>@{{ user.username }}</small><hr>
-          <button class="mdb-btn">팔로우</button>
+          <h4 class="mb-1 fw-bold">{{ user.nickname }}</h4>
+          <small class="text-secondary">@{{ user.username }}</small>
         </div>
+        
+        <button class="btn-ai-recommend ms-auto" @click="router.push({ name: 'RecommendView' })">
+          AI 음악 추천
+        </button>
       </div>
     </div>
     <!-- ✅ 프로필 뮤직 + 유튜브 가로 배치 -->
@@ -26,7 +29,7 @@
         />
 
         <div class="profile-music-info">
-          <p class="label">🎵 프로필 뮤직</p>
+          <p class="label">프로필 뮤직</p>
           <p class="title">{{ profileMusic.track_name }}</p>
           <p class="artist">
             {{ profileMusic.artist.map(a => a.name).join(', ') }}
@@ -37,7 +40,7 @@
       <!-- 오른쪽: 유튜브 카드 -->
       <YoutubeTrackCard
         :track="profileMusic"
-        title="🎬 뮤직 비디오"
+        title="뮤직 비디오"
         class="youtube-side"
       />
     </div>
@@ -45,12 +48,6 @@
     <!-- <pre style="background:#eee; padding:10px;">
     {{ profileMusic }}
     </pre> -->
-
-    <!-- 🔹 Recommend Section -->
-    <div class="card section-card p-4 mb-4">
-      <h5 class="fw-bold mb-3">🎧 추천 음악</h5>
-      <UserRecommend />
-    </div>
 
     <!-- 🔹 UserLikedList Section -->
     <div class="card section-card p-4">
@@ -66,20 +63,21 @@
 </template>
 
 <script setup>
-  import UserRecommend from '@/components/UserRecommend.vue'
+  // import UserRecommend from '@/components/UserRecommend.vue'
   // import UserLiked from '@/components/UserLiked.vue'
   import UserLikedList from '@/components/UserLikedList.vue'
-  import { RouterView } from 'vue-router'
+  import { RouterView, useRouter } from 'vue-router'
   // Pinia state를 반응성 유지한 채로 구조 분해위해 사용
   import { storeToRefs } from 'pinia'
   import { useAccountStore } from '@/stores/accounts'
   import { onMounted } from 'vue'
   import YoutubeTrackCard from '@/components/YoutubeTrackCard.vue'
-  
+
 
   const accountStore = useAccountStore()
   const { user } = storeToRefs(accountStore)
   const { profileMusic } = storeToRefs(accountStore)
+  const router = useRouter()
 
   // 새로고침 대응
   onMounted(() => {
@@ -165,5 +163,25 @@
 .profile-music-info .artist {
   font-size: 0.85rem;
   color: #888888;
+}
+
+/* AI 추천 버튼 */
+.btn-ai-recommend {
+  background: #D4FF00;
+  color: #0a0a0a;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(212, 255, 0, 0.2);
+}
+
+.btn-ai-recommend:hover {
+  background: #E6FF33;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 255, 0, 0.4);
 }
 </style>
