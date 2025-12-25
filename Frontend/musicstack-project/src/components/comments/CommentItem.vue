@@ -93,38 +93,40 @@ const formatDate = (isoString) => {
 <style scoped>
 /* 댓글 카드 */
 .comment-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
 }
 
 .comment-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+  border-color: rgba(212, 255, 0, 0.2);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
 }
 
 /* 댓글 내용 */
 .comment-content {
   font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 6px;
-  color: #222;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  color: #e0e0e0;
 }
 
 /* 날짜 */
 .comment-date {
   font-size: 0.75rem;
-  color: #999;
+  color: #555555;
 }
 
 /* 수정/삭제 버튼 */
 .comment-actions {
-  margin-top: 8px;
+  margin-top: 10px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .edit-btn,
@@ -133,58 +135,84 @@ const formatDate = (isoString) => {
   background: none;
   font-size: 0.8rem;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
 }
 
 .edit-btn {
-  color: #2575fc;
+  color: #D4FF00;
+}
+
+.edit-btn:hover {
+  color: #E6FF33;
 }
 
 .delete-btn {
-  color: #e74c3c;
+  color: #888888;
+}
+
+.delete-btn:hover {
+  color: #ff4757;
 }
 
 /* 수정 모드 */
 .edit-box {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .edit-input {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #ffffff;
   font-size: 0.9rem;
+  outline: none;
+  transition: all 0.25s ease;
 }
 
 .edit-input:focus {
-  outline: none;
-  border-color: #2575fc;
+  border-color: #D4FF00;
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
 }
 
 /* 수정 버튼 영역 */
 .edit-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .save-btn {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  background: #D4FF00;
+  color: #0a0a0a;
   border: none;
-  border-radius: 16px;
-  padding: 6px 14px;
+  border-radius: 18px;
+  padding: 8px 18px;
   font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.save-btn:hover {
+  background: #E6FF33;
 }
 
 .cancel-btn {
-  background: #eee;
+  background: #252525;
+  color: #a0a0a0;
   border: none;
-  border-radius: 16px;
-  padding: 6px 14px;
+  border-radius: 18px;
+  padding: 8px 18px;
   font-size: 0.8rem;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cancel-btn:hover {
+  background: #2a2a2a;
+  color: #ffffff;
 }
 </style>

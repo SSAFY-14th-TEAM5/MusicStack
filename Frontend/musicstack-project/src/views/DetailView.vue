@@ -157,37 +157,40 @@ const formatDate = (isoString) => {
 
 <style scoped>
 .detail-page {
-  max-width: 800px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 40px 20px 80px;
+  padding: 48px 24px 100px;
+  min-height: 100vh;
 }
 
 .detail-card {
-  background: white;
-  border-radius: 18px;
-  padding: 32px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
 }
 
 /* 제목 */
 .detail-title {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  color: #ffffff;
 }
 
 /* 날짜 */
 .detail-meta {
   font-size: 0.8rem;
-  color: #888;
-  margin-bottom: 24px;
+  color: #666666;
+  margin-bottom: 28px;
 }
 
 /* 본문 */
 .detail-content {
   font-size: 1rem;
-  line-height: 1.7;
-  color: #333;
+  line-height: 1.8;
+  color: #a0a0a0;
   white-space: pre-line;
 }
 
@@ -195,70 +198,100 @@ const formatDate = (isoString) => {
 .edit-box {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .edit-input,
 .edit-textarea {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #ffffff;
   font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  border-color: #D4FF00;
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
 }
 
 .edit-textarea {
-  min-height: 140px;
+  min-height: 160px;
   resize: vertical;
 }
 
 .edit-actions {
   display: flex;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 14px;
+  margin-top: 12px;
 }
 
 /* 버튼 */
 .primary-btn {
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 12px 26px;
+  border-radius: 24px;
   border: none;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  background: #D4FF00;
+  color: #0a0a0a;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.primary-btn:hover {
+  background: #E6FF33;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
 }
 
 .ghost-btn {
-  padding: 10px 18px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  background: white;
+  padding: 12px 22px;
+  border-radius: 24px;
+  border: 1px solid #2a2a2a;
+  background: transparent;
+  color: #a0a0a0;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ghost-btn:hover {
+  border-color: #D4FF00;
+  color: #D4FF00;
 }
 
 .danger-btn {
-  padding: 10px 18px;
-  border-radius: 20px;
+  padding: 12px 22px;
+  border-radius: 24px;
   border: none;
-  background: #ff4d4f;
-  color: white;
+  background: rgba(255, 71, 87, 0.15);
+  color: #ff4757;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.danger-btn:hover {
+  background: #ff4757;
+  color: #ffffff;
 }
 
 /* 작성자 버튼 */
 .author-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 28px;
 }
 
 /* 댓글 */
 .comment-section {
-  margin-top: 40px;
-  padding-top: 24px;
-  border-top: 1px solid #eee;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid #2a2a2a;
 }
 </style>

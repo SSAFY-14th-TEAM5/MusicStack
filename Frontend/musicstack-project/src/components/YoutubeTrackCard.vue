@@ -70,22 +70,29 @@ const artistText = computed(() => {
 
 <style scoped>
 .fav-track-container {
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 /* 카드 */
 .track-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+}
+
+.track-card:hover {
+  border-color: rgba(212, 255, 0, 0.2);
 }
 
 /* 제목 */
 .section-title {
   font-size: 1.1rem;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  color: #ffffff;
 }
 
 /* 유튜브 */
@@ -94,7 +101,8 @@ const artistText = computed(() => {
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .video-wrapper iframe {
@@ -106,23 +114,25 @@ const artistText = computed(() => {
 
 /* 정보 */
 .track-info {
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .title-text {
   font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
 .artist-text {
   font-size: 0.85rem;
-  color: #666;
+  color: #888888;
+  margin-top: 4px;
 }
 
 /* 빈 상태 */
 .no-data {
   text-align: center;
-  color: #777;
-  padding: 20px 0;
+  color: #555555;
+  padding: 24px 0;
 }
 </style>

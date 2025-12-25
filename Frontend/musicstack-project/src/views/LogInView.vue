@@ -66,83 +66,131 @@
 <style scoped>
 .login-wrapper {
   min-height: 100vh;
-  background-color: #f5f6fa;
+  background: #0a0a0a;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 배경 그라디언트 효과 */
+.login-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(212, 255, 0, 0.05) 0%, transparent 50%);
+  animation: rotate-bg 20s linear infinite;
+}
+
+@keyframes rotate-bg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .login-card {
-  width: 360px;
-  background: white;
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  width: 400px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 40px 36px;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
 }
 
 .login-title {
   text-align: center;
-  font-weight: 700;
-  margin-bottom: 24px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin-bottom: 32px;
+  color: #D4FF00;
 }
 
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .form-group label {
   display: block;
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-  color: #555;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #a0a0a0;
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #ffffff;
+  font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
+}
+
+.form-group input::placeholder {
+  color: #555555;
 }
 
 .form-group input:focus {
-  border-color: #2575fc;
-  box-shadow: 0 0 0 2px rgba(37,117,252,0.15);
+  border-color: #D4FF00;
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
 }
 
 .login-btn {
   width: 100%;
-  margin-top: 10px;
-  padding: 12px;
+  margin-top: 16px;
+  padding: 14px;
   border: none;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  border-radius: 30px;
+  background: #D4FF00;
+  color: #0a0a0a;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  background: #E6FF33;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(212, 255, 0, 0.3);
+}
+
+/* 에러 메시지 */
+.error-box {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 71, 87, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  border-radius: 10px;
+  color: #ff4757;
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 /* 에러 메시지 fade */
 .error-fade-enter-active,
 .error-fade-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .error-fade-enter-from {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-8px);
 }
 
 .error-fade-leave-to {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-8px);
 }
 
 </style>

@@ -107,60 +107,96 @@
 <style scoped>
 .signup-wrapper {
   min-height: 100vh;
-  background-color: #f5f6fa;
+  background: #0a0a0a;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 배경 그라디언트 효과 */
+.signup-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(212, 255, 0, 0.05) 0%, transparent 50%);
+  animation: rotate-bg 25s linear infinite reverse;
+}
+
+@keyframes rotate-bg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .signup-card {
-  width: 420px;
-  background: white;
-  padding: 36px;
-  border-radius: 18px;
-  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  width: 440px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  padding: 44px 40px;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
 }
 
 .signup-title {
   text-align: center;
-  font-weight: 700;
-  margin-bottom: 28px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin-bottom: 36px;
+  color: #D4FF00;
 }
 
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .form-group label {
   display: block;
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-  color: #555;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #a0a0a0;
 }
 
 .form-group input {
   width: 100%;
-  padding: 11px 14px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #ffffff;
+  font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
+}
+
+.form-group input::placeholder {
+  color: #555555;
 }
 
 .form-group input:focus {
-  border-color: #2575fc;
-  box-shadow: 0 0 0 2px rgba(37,117,252,0.15);
+  border-color: #D4FF00;
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
 }
 
 /* 장르 섹션 */
 .genre-section {
-  margin: 22px 0;
+  margin: 28px 0;
 }
 
 .genre-title {
   font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  color: #ffffff;
 }
 
 .genre-list {
@@ -170,44 +206,48 @@
 }
 
 .genre-chip {
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  background: white;
+  padding: 10px 18px;
+  border-radius: 24px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #a0a0a0;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .genre-chip:hover {
-  background-color: #f0f0f0;
+  border-color: #D4FF00;
+  color: #D4FF00;
 }
 
 /* 선택된 장르 */
 .genre-chip.active {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  border: none;
+  background: #D4FF00;
+  color: #0a0a0a;
+  border-color: #D4FF00;
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 16px rgba(212, 255, 0, 0.3);
 }
 
 /* 회원가입 버튼 */
 .signup-btn {
   width: 100%;
-  margin-top: 20px;
-  padding: 14px;
+  margin-top: 28px;
+  padding: 16px;
   border: none;
-  border-radius: 26px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  border-radius: 30px;
+  background: #D4FF00;
+  color: #0a0a0a;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .signup-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  background: #E6FF33;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(212, 255, 0, 0.3);
 }
 </style>

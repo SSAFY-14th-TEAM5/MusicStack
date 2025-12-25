@@ -3,7 +3,7 @@
     <div class="pulse-circle"></div>
 
     <p class="loading-text">
-      LLM이 음악을 분석하고 있어요<span class="dots">...</span>
+      Analyzing your music taste<span class="dots">...</span>
     </p>
   </div>
 </template>
@@ -17,39 +17,44 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px;
-  color: #555;
+  padding: 100px 20px;
+  color: #a0a0a0;
 }
 
 /* 원형 펄스 */
 .pulse-circle {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  animation: pulse 1.6s ease-in-out infinite;
-  margin-bottom: 20px;
+  background: #D4FF00;
+  animation: pulse 1.8s ease-in-out infinite;
+  margin-bottom: 28px;
+  box-shadow: 0 0 40px rgba(212, 255, 0, 0.4);
 }
 
 @keyframes pulse {
   0% {
-    transform: scale(0.95);
-    opacity: 0.7;
+    transform: scale(0.9);
+    opacity: 0.6;
+    box-shadow: 0 0 30px rgba(212, 255, 0, 0.3);
   }
   50% {
-    transform: scale(1.15);
+    transform: scale(1.2);
     opacity: 1;
+    box-shadow: 0 0 60px rgba(212, 255, 0, 0.6);
   }
   100% {
-    transform: scale(0.95);
-    opacity: 0.7;
+    transform: scale(0.9);
+    opacity: 0.6;
+    box-shadow: 0 0 30px rgba(212, 255, 0, 0.3);
   }
 }
 
 /* 텍스트 */
 .loading-text {
-  font-size: 0.95rem;
+  font-size: 1rem;
   letter-spacing: 1px;
+  color: #888888;
 }
 
 /* 점점점 애니메이션 */

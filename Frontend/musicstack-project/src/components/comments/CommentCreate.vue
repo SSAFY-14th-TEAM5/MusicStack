@@ -41,62 +41,65 @@ const submitComment = () => {
 <style scoped>
 /* 전체 래퍼 */
 .comment-create {
-  margin-top: 32px;
-  padding: 20px;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 36px;
+  padding: 24px;
+  border-radius: 18px;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* textarea */
 .comment-input {
   width: 100%;
-  min-height: 90px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
+  min-height: 100px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #ffffff;
   font-size: 0.95rem;
   resize: vertical;
   outline: none;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .comment-input::placeholder {
-  color: #aaa;
+  color: #555555;
 }
 
 .comment-input:focus {
-  border-color: #2575fc;
-  box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.15);
+  border-color: #D4FF00;
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.15);
 }
 
 /* 버튼 영역 */
 .btn-wrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 /* 제출 버튼 */
 .submit-btn {
-  padding: 10px 22px;
-  border-radius: 20px;
+  padding: 12px 26px;
+  border-radius: 24px;
   border: none;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  background: #D4FF00;
+  color: #0a0a0a;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .submit-btn:hover {
+  background: #E6FF33;
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
 }
 
 .submit-btn:active {
   transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 </style>

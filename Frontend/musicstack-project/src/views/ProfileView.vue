@@ -29,9 +29,10 @@
 
 <style scoped>
   .profile-page {
-    max-width: 1100px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 48px 24px 100px;
+    min-height: 100vh;
   }
 
 </style>

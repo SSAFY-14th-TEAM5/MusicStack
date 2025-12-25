@@ -38,26 +38,53 @@ const onSearch = (keyword) => {
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d');
-  background-size: cover;
-  background-position: center;
+  height: calc(100vh - 72px);
+  background: #0a0a0a;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-/* ===== 어두운 오버레이 ===== */
+/* ===== 어두운 오버레이 + 패턴 ===== */
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(20, 0, 40, 0.75),
-    rgba(0, 0, 0, 0.85)
-  );
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(212, 255, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(212, 255, 0, 0.05) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.02) 2px
+    );
   z-index: 1;
+}
+
+/* 움직이는 그라디언트 원 */
+.overlay::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: pulse-bg 4s ease-in-out infinite;
+}
+
+@keyframes pulse-bg {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.8;
+  }
 }
 
 /* ===== 중앙 콘텐츠 ===== */
@@ -65,33 +92,53 @@ const onSearch = (keyword) => {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 720px;
+  max-width: 800px;
   padding: 0 24px;
-
-  /* 등장 애니메이션 */
-  animation: fadeUp 0.9s ease-out forwards;
+  animation: fadeUp 1s ease-out forwards;
 }
 
-/* ===== 텍스트 ===== */
+/* ===== 서브타이틀 ===== */
 .hero-subtitle {
-  font-size: 0.9rem;
-  letter-spacing: 4px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  color: #D4FF00;
+  margin-bottom: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.2s forwards;
 }
 
+/* ===== 메인 타이틀 ===== */
 .hero-title {
-  font-size: 3.8rem;
-  font-weight: 800;
-  margin-bottom: 36px;
-  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 6rem;
+  font-weight: 400;
+  margin-bottom: 48px;
+  color: #ffffff;
+  letter-spacing: 8px;
+  text-shadow: 0 0 60px rgba(212, 255, 0, 0.3);
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.4s forwards;
+}
+
+/* 타이틀 강조 효과 */
+.hero-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #D4FF00;
+  margin: 24px auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(212, 255, 0, 0.6);
 }
 
 /* ===== 애니메이션 ===== */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -102,12 +149,25 @@ const onSearch = (keyword) => {
 /* ===== 반응형 ===== */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.6rem;
-    margin-bottom: 28px;
+    font-size: 3.5rem;
+    letter-spacing: 4px;
+    margin-bottom: 36px;
   }
 
   .hero-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+  }
+
+  .overlay::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.5rem;
   }
 }
 </style>
