@@ -33,6 +33,8 @@ def search(request):
     response = extract_artist(user_input)
     content_str = response.choices[0].message.content
 
+   
+
     # json 파싱
     content_dict = json.loads(content_str)
 
@@ -54,19 +56,19 @@ def search(request):
 
     # 가수가 한 명이면 검색을 해야함
     elif len(artist_list) == 1:
-        artist_eng = artist_list[0]["english"]
+        artist_query = artist_list[0]["query"]
         # db에 저장되어 있는지 확인
-        artist_db = Artist.objects.filter(name=artist_eng).first()
+        artist_db = Artist.objects.filter(name=artist_query).first()
 
         # db에 없다면 등록
         if not artist_db:
-            new_artist_id, genres = get_artist(artist_eng)
+            new_artist_id, genres = get_artist(artist_query)
 
             if not new_artist_id:
                 success = False
             
             new_artist = Artist()
-            new_artist.name = artist_eng
+            new_artist.name = artist_query
             new_artist.artist_id = new_artist_id
             new_artist.save()
 
