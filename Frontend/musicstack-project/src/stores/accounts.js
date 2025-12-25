@@ -35,8 +35,8 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
       .then(res => {
-        console.log('회원 가입이 완료되었습니다.')
-        console.log(res.data)
+        // console.log('회원 가입이 완료되었습니다.')
+        // console.log(res.data)
         const password = password1
         logIn({ username, password })
       })
@@ -56,8 +56,8 @@ export const useAccountStore = defineStore('account', () => {
       }
     })
       .then(res => {
-        console.log('로그인이 완료되었습니다.')
-        console.log(res.data)
+        // console.log('로그인이 완료되었습니다.')
+        // console.log(res.data)
         token.value = res.data.key
         router.push({ name: 'Home' })
         return getUserInfo()

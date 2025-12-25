@@ -87,7 +87,7 @@ const recommendations = ref(null)
     // AI 응답의 'recommendations' 배열을 저장
     recommendations.value = parsedData
 
-    console.log(recommendations.value)
+    // console.log(recommendations.value)
   } catch (error) {
     console.error("추천 로직 에러:", error)
     alert("AI 서버와 통신 중 문제가 발생했습니다.")

@@ -50,7 +50,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
       // artist_id: [],
     }
 
-    console.log(payloadTrack)
+    // console.log(payloadTrack)
 
     try {
       await axios.post(

@@ -127,4 +127,15 @@
     font-size: 1rem;
   }
 }
+
+.author {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #666;
+  background: #222;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+
 </style>

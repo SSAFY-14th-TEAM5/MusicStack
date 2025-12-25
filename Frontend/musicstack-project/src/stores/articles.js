@@ -15,7 +15,7 @@ export const useArticleStore = defineStore('article', () => {
   const next = ref(null)
   const previous = ref(null)
   const currentPage = ref(1)
-  const pageSize = 10
+  const pageSize = 5
 
   // 페이지 계산
   const totalPages = computed(() =>
@@ -29,7 +29,7 @@ export const useArticleStore = defineStore('article', () => {
       url: `${API_URL}/articles/?page=${page}`,
     })
     .then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       articles.value = res.data.results
       count.value = res.data.count
       next.value = res.data.next
@@ -55,7 +55,7 @@ export const useArticleStore = defineStore('article', () => {
       },
     })
     .then(res => {
-      console.log(res)
+      // console.log(res)
       router.push({ name: 'ArticleView' })
     })
   }
