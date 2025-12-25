@@ -69,9 +69,6 @@ const artistText = computed(() => {
 </script>
 
 <style scoped>
-.fav-track-container {
-  margin-bottom: 36px;
-}
 
 /* 카드 */
 .track-card {
