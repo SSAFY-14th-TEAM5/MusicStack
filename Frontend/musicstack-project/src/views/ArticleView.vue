@@ -16,7 +16,7 @@
       <button
         class="page-btn"
         :disabled="store.currentPage === 1"
-        @click="store.getArticles(store.currentPage - 1)"
+        @click="goPage(store.currentPage - 1)"
       >
         ← 이전
       </button>
@@ -27,7 +27,7 @@
         :key="page"
         class="page-number"
         :class="{ active: page === store.currentPage }"
-        @click="store.getArticles(page)"
+        @click="goPage(page)"
       >
         {{ page }}
       </button>
@@ -36,7 +36,7 @@
       <button
         class="page-btn"
         :disabled="store.currentPage === store.totalPages"
-        @click="store.getArticles(store.currentPage + 1)"
+        @click="goPage(store.currentPage + 1)"
       >
         다음 →
       </button>
@@ -46,23 +46,41 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref, onMounted, computed, watch } from 'vue';
+import { RouterLink, useRouter, useRoute } from 'vue-router';
 import { useArticleStore } from '@/stores/articles'
 import ArticleList from '@/components/ArticleList.vue'
 const store = useArticleStore()
+const router = useRouter()
+const route = useRoute()
 // const articles = ref([])  // 로컬 테스트용 코드 (향후 삭제)
 
-onMounted(() => {
-  store.getArticles(1) // DB에 저장된 게시글 불러오기
-  // articles.value = [  // 로컬 테스트용 코드 (향후 삭제)
-  //   { pk: 1, title: '로컬 테스트', content: '백엔드 없음' },
-  //   { pk: 2, title: '로컬 테스트2', content: '백엔드 없음2' },
-  //   { pk: 3, title: '로컬 테스트3', content: '백엔드 없음3' },
-  // ]
-})
+// onMounted(() => {
+//   store.getArticles(1) // DB에 저장된 게시글 불러오기
+//   // articles.value = [  // 로컬 테스트용 코드 (향후 삭제)
+//   //   { pk: 1, title: '로컬 테스트', content: '백엔드 없음' },
+//   //   { pk: 2, title: '로컬 테스트2', content: '백엔드 없음2' },
+//   //   { pk: 3, title: '로컬 테스트3', content: '백엔드 없음3' },
+//   // ]
+// })
 
-/* 🔹 현재 페이지 기준 ±2 페이지만 보여주기 */
+/*  URL(page) 변경 감지 → 게시글 다시 요청 */
+watch(
+  () => route.query.page,
+  (newPage) => {
+    const page = Number(newPage) || 1
+    store.getArticles(page)
+
+    // 페이지 변경 후 스크롤 맨 위로
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // 부드러운 스크롤
+    })
+  },
+  { immediate: true }
+)
+
+/* 현재 페이지 기준 ±2 페이지만 보여주기 */
 const pageNumbers = computed(() => {
   const pages = []
   const start = Math.max(1, store.currentPage - 2)
@@ -73,6 +91,14 @@ const pageNumbers = computed(() => {
   }
   return pages
 })
+
+// 페이지 이동함수
+const goPage = (page) => {
+  router.push({
+    name: 'ArticleView',
+    query: { page }
+  })
+}
 </script>
 
 <style scoped>
