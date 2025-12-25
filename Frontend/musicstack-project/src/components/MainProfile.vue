@@ -2,13 +2,13 @@
   <div v-if="user" class="container my-5">
     <!-- 🔹 Profile Card -->
     <div class="card profile-header p-4 mb-4">
-      <div class="d-flex align-items-center">
-        <div class="profile-avatar me-3">
+      <div class="d-flex flex-row align-items-center text-center" style="gap: 20px;">
+        <div class="profile-avatar mb-3">
           {{ user.nickname?.charAt(0) }}
         </div>
         <div>
-          <h4 class="mb-0 fw-bold">{{ user.nickname }}</h4>
-          <small>@{{ user.username }}</small><hr>
+          <h4 class="mb-1 fw-bold">{{ user.nickname }}</h4>
+          <small class="text-secondary">@{{ user.username }}</small>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
         />
 
         <div class="profile-music-info">
-          <p class="label">🎵 프로필 뮤직</p>
+          <p class="label">프로필 뮤직</p>
           <p class="title">{{ profileMusic.track_name }}</p>
           <p class="artist">
             {{ profileMusic.artist.map(a => a.name).join(', ') }}
@@ -36,7 +36,7 @@
       <!-- 오른쪽: 유튜브 카드 -->
       <YoutubeTrackCard
         :track="profileMusic"
-        title="🎬 뮤직 비디오"
+        title="뮤직 비디오"
         class="youtube-side"
       />
     </div>
