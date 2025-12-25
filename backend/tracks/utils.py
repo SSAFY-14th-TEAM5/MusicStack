@@ -100,9 +100,9 @@ def get_artist(artist_name):
     
     if len(items) > 0:
         artist = items[0]
-        return artist['id'], artist['genres']
+        return artist['id'], artist['genres'], artist['name']
     
-    return None, []
+    return None, [], None
 
 
 def get_top_10_tracks(artist_id):
