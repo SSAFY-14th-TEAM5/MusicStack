@@ -1,7 +1,12 @@
 <template>
   <div class="article-card">
     <div class="card-header">
-      <h3 class="title">{{ article.title }}</h3>
+      <h3 class="title">
+        {{ article.title }}
+        <span class="comment-count">
+        💬 {{ article.comment_count }}
+      </span>
+      </h3>
     </div>
 
     <p class="content">

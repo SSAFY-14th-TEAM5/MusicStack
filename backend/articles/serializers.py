@@ -5,9 +5,15 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class ArticleListSerializer(serializers.ModelSerializer):
+    # 댓글 수를 카운팅하기 위한 필드
+    comment_count = serializers.IntegerField(
+        source='comments.count',
+        read_only=True
+    )
+    
     class Meta:
         model = Article
-        fields = ('id', 'author', 'title', 'content', )
+        fields = ('id', 'author', 'title', 'content', 'comment_count',)
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
