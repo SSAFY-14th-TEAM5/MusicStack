@@ -36,7 +36,7 @@
               <p class="track-year">{{ track.release_year }}</p>
             </div>
 
-            <button @click="favoriteStore.saveFavorite(track)" class="like-btn" :class="{ 'active': isLiked(track) }">
+            <button @click="toggleLike(track)" class="like-btn" :class="{ 'active': isLiked(track) }">
               <!-- SVG 하트 아이콘 -->
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -116,6 +116,10 @@ watch(
   (newQ) => {
     if (!newQ) return
     visibleCount.value = 4
+    //  기존 검색 결과 제거
+    searchStore.reset()
+
+    //  새 검색
     searchStore.search(newQ)
   },
   { immediate: true }
@@ -136,6 +140,24 @@ const loadMore = async () => {
     behavior: 'smooth'
   })
 }
+
+// 좋아요 토글
+const toggleLike = (track) => {
+  if (!accountStore.userPk) {
+    alert('로그인이 필요합니다.')
+    return
+  }
+
+  if (isLiked(track)) {
+    // ✅ 서버에 좋아요 취소
+    favoriteStore.deleteFavorite(track.track_id)
+  } else {
+    // ✅ 서버에 좋아요 저장
+    favoriteStore.saveFavorite(track)
+  }
+}
+
+
 </script>
 
 <style scoped>

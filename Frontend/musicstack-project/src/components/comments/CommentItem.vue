@@ -15,6 +15,9 @@
     <!-- 일반 보기 -->
     <div v-else>
       <p class="comment-content">{{ comment.content }}</p>
+      <span class="comment-author">
+        {{ comment.author.nickname }}
+      </span>
       <small class="comment-date">{{ formatDate(comment.created_at) }}</small>
 
       <div v-if="isAuthor" class="comment-actions">

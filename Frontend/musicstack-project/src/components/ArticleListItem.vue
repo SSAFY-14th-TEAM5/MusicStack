@@ -6,6 +6,9 @@
         <span class="comment-count">
         💬 {{ article.comment_count }}
       </span>
+      <span class="author">
+        @{{ article.author.nickname }}
+      </span>
       </h3>
     </div>
 
