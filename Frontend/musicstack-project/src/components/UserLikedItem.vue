@@ -22,7 +22,16 @@
       @click="cancelLike"
     >
       <!-- SVG 하트 아이콘 -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        stroke="currentColor"
+        stroke-width="0"
+        class="heart-icon"
+      >
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
       </svg>
       좋아요 취소
@@ -152,6 +161,36 @@ h2 {
   background: #E6FF33;
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(212, 255, 0, 0.3);
+}
+
+/* 좋아요 취소 버튼 */
+.unlike-btn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 30px;
+  border: 1px solid #ff4081;
+  background: transparent;
+  color: #ff4081;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  margin-bottom: 32px;
+}
+
+.unlike-btn:hover {
+  background: #ff4081;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 64, 129, 0.3);
+}
+
+.heart-icon {
+  margin-top: 1px;
 }
 
 /* 로딩 상태 */

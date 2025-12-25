@@ -7,9 +7,8 @@
           {{ user.nickname?.charAt(0) }}
         </div>
         <div>
-          <h4 class="mb-0 fw-bold">닉네임: {{ user.nickname }}</h4>
+          <h4 class="mb-0 fw-bold">{{ user.nickname }}</h4>
           <small>@{{ user.username }}</small><hr>
-          <button class="mdb-btn">팔로우</button>
         </div>
       </div>
     </div>
