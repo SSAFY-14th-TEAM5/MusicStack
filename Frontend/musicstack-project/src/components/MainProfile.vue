@@ -1,6 +1,18 @@
 <template>
   <div v-if="user" class="container my-5">
-
+    <!-- 🔹 Profile Card -->
+    <div class="card profile-header p-4 mb-4">
+      <div class="d-flex align-items-center">
+        <div class="profile-avatar me-3">
+          {{ user.nickname?.charAt(0) }}
+        </div>
+        <div>
+          <h4 class="mb-0 fw-bold">닉네임: {{ user.nickname }}</h4>
+          <small>@{{ user.username }}</small><hr>
+          <button class="mdb-btn">팔로우</button>
+        </div>
+      </div>
+    </div>
     <!-- ✅ 프로필 뮤직 + 유튜브 가로 배치 -->
     <div
       v-if="profileMusic"
@@ -33,21 +45,6 @@
     <!-- <pre style="background:#eee; padding:10px;">
     {{ profileMusic }}
     </pre> -->
-
-
-    <!-- 🔹 Profile Card -->
-    <div class="card profile-header p-4 mb-4">
-      <div class="d-flex align-items-center">
-        <div class="profile-avatar me-3">
-          {{ user.nickname?.charAt(0) }}
-        </div>
-        <div>
-          <h4 class="mb-0 fw-bold">닉네임: {{ user.nickname }}</h4>
-          <small>@{{ user.username }}</small><hr>
-          <button class="mdb-btn">팔로우</button>
-        </div>
-      </div>
-    </div>
 
     <!-- 🔹 Recommend Section -->
     <div class="card section-card p-4 mb-4">
@@ -97,7 +94,6 @@
 /* ===== 프로필 뮤직 가로 배치 ===== */
 .profile-music-row {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
   gap: 28px;
   margin-bottom: 40px;
   align-items: stretch;
