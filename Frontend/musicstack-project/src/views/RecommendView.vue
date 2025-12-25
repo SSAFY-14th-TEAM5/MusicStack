@@ -72,10 +72,10 @@ onMounted(() => {
 const isLoading = ref(false)
 const recommendations = ref(null)
 
-const getRecommendation = async () => {
+  const getRecommendation = async () => {
   isLoading.value = true
   // 실제 유저 PK를 스토어나 인증 정보에서 가져오세요
-  const userPk = 1 
+  const userPk = accountStore.userPk // 1 대신 실제 pk 사용
 
   try {
     const response = await axios.post(`http://127.0.0.1:8000/api/v1/tracks/recommend/${userPk}/`)
@@ -98,69 +98,238 @@ const getRecommendation = async () => {
 </script>
 
 <style scoped>
-/* 디자인은 프로젝트 스타일에 맞게 수정하세요 */
+/* ================================================
+   MUSIC STACK - RECOMMEND VIEW 스타일
+   다크 테마 + 형광 노란색 포인트 적용
+   ================================================ */
+
 .recommend-container {
   max-width: 800px;
-  margin: 50px auto;
+  margin: 60px auto;
   text-align: center;
+  padding: 0 20px;
+  color: #ffffff;
 }
 
-.locked-section, .loading-box {
-  padding: 40px;
-  background: #f8f9fa;
-  border-radius: 15px;
+/* 제목 영역 */
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #ffffff;
 }
 
+.subtitle {
+  color: #888888;
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+
+/* 공통 박스 스타일 */
+.locked-section, .intro-box, .loading-box {
+  padding: 48px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+/* 잠금 상태 */
+.lock-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.locked-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.locked-section p {
+  color: #888888;
+  margin-bottom: 24px;
+}
+
+/* 프로그레스 바 */
 .progress-bar-container {
   width: 100%;
-  height: 20px;
-  background: #e9ecef;
-  border-radius: 10px;
-  margin: 20px 0;
+  height: 12px;
+  background: #333333;
+  border-radius: 6px;
+  margin: 0 auto 16px;
+  max-width: 400px;
+  overflow: hidden;
 }
 
 .progress-bar {
   height: 100%;
-  background: #007bff;
-  border-radius: 10px;
+  background: #D4FF00; /* 포인트 컬러 */
+  border-radius: 6px;
   transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(212, 255, 0, 0.5);
 }
 
-.song-card {
-  background: white;
-  border: 1px solid #eee;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  text-align: left;
+.count-text {
+  font-weight: 700;
+  color: #D4FF00;
+  margin-bottom: 32px;
 }
 
-.title { font-weight: bold; font-size: 1.1em; margin: 0; }
-.artist { color: #666; margin: 5px 0; }
-.reason { font-size: 0.9em; color: #888; border-top: 1px solid #f0f0f0; padding-top: 10px; margin-top: 10px; }
-
-.btn-recommend {
-  padding: 15px 40px;
-  font-size: 1.2em;
-  background: #000;
-  color: white;
+/* 버튼 스타일 */
+.btn-go-tracks, .btn-recommend, .btn-retry {
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #D4FF00;
+  color: #0a0a0a;
   border: none;
   border-radius: 30px;
   cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
 
+.btn-go-tracks:hover, .btn-recommend:hover, .btn-retry:hover {
+  background: #E6FF33;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
+}
+
+/* 추천 시작 문구 */
+.intro-box p {
+  font-size: 1.1rem;
+  color: #cccccc;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* 로딩 상태 */
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  width: 48px;
+  height: 48px;
+  border: 4px solid #333333;
+  border-top: 4px solid #D4FF00;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin: 0 auto 20px;
+  margin: 0 auto 24px;
+}
+
+.loading-box p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.loading-box .small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #888888;
+}
+
+/* 결과 리스트 */
+.results-box h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  color: #D4FF00;
+}
+
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.song-card {
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  padding: 24px;
+  border-radius: 18px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.song-card:hover {
+  border-color: rgba(212, 255, 0, 0.3);
+  transform: translateX(4px);
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.rank {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #D4FF00;
+  background: rgba(212, 255, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.artist {
+  font-size: 0.95rem;
+  color: #888888;
+  margin: 0;
+}
+
+.reason {
+  font-size: 0.95rem;
+  color: #cccccc;
+  line-height: 1.5;
+  background: #141414;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 0;
+}
+
+.btn-retry {
+  background: transparent;
+  border: 1px solid #D4FF00;
+  color: #D4FF00;
+}
+
+.btn-retry:hover {
+  background: #D4FF00;
+  color: #0a0a0a;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .intro-box, .loading-box, .locked-section {
+    padding: 32px 20px;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  
+  .song-info {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 </style>
