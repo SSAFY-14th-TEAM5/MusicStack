@@ -85,7 +85,8 @@ export const useAccountStore = defineStore('account', () => {
       .then(res => {
         token.value = null
         user.value = null
-        profileMusic.value = null 
+        profileMusic.value = null
+        localStorage.removeItem('pinia-search')
         router.push({ name: 'LogInView' })
       })
       .catch(err => console.log(err))

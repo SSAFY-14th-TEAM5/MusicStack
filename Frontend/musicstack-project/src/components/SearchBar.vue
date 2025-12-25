@@ -21,7 +21,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: 'Search songs, artists, genres...',
+    default: 'Search artists name...',
   },
 })
 
