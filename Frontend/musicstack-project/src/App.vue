@@ -19,6 +19,14 @@
             >
               Community
           </RouterLink>
+
+          <RouterLink
+            v-if="accountStore.isLogin"
+            class="nav-link-custom"
+            :to="{ name: 'RecommendView' }"
+            >
+              AI 추천
+          </RouterLink>
             
         </div>
 

@@ -8,4 +8,5 @@ urlpatterns = [
     path('fav/create/', views.fav_save),
     path('<int:user_pk>/fav/latest/', views.fav_latest),
     path('recommend/<int:user_pk>/', views.recommend),
+    path('fav/count/', views.get_fav_count),
 ]

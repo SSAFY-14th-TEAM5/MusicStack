@@ -8,6 +8,7 @@ import SearchView from '@/views/SearchView.vue'
 import ArticleView from '@/views/ArticleView.vue'
 import ArticleCreate from '@/components/ArticleCreate.vue'
 import DetailView from '@/views/DetailView.vue'
+import RecommendView from '@/views/RecommendView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,7 +63,12 @@ const router = createRouter({
       name: 'UserLikedItem',
       component: () => import('@/components/UserLikedItem.vue'),
     },
-
+    {
+      path: '/recommend',
+      name: 'RecommendView',
+      component: RecommendView,
+      meta: { requiresLikes: 10 }
+    },
   ],
 })
 
@@ -78,6 +84,11 @@ router.beforeEach((to, from) => {
   if ((to.name === 'SignUpView' || to.name === 'LogInView') && (accountStore.isLogin) ) {
     window.alert('이미 로그인 되어 있습니다.')
     return { name: 'Home' }
+  }
+
+  if (to.meta.requiresAuth && !accountStore.isLogin) {
+    window.alert('로그인이 필요합니다.')
+    return { name: 'LogInView' }
   }
 })
 

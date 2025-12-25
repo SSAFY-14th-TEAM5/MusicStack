@@ -77,6 +77,36 @@ export const useFavoriteStore = defineStore('favorite', () => {
     })
   }
 
+  // 1. State: 숫자만 저장
+  const likedTracksCount = ref(0)
+
+  // 2. Action: 백엔드에서 숫자만 받아오기
+  const fetchLikedCount = async (userPk) => {
+    const accountStore = useAccountStore()
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/v1/tracks/fav/count/`,
+        {
+          headers: {
+            Authorization: `Token ${accountStore.token}`,
+          },
+        }
+      )
+      // 백엔드에서 {'count': 15} 형태로 준다고 가정
+      likedTracksCount.value = response.data.count
+    } catch (error) {
+      console.error('좋아요 개수를 가져오지 못했습니다:', error)
+    }
+  }
+
+  // 3. 만약 사용자가 '좋아요' 버튼을 누를 때마다 숫자를 실시간으로 바꾸고 싶다면?
+  const incrementCount = () => {
+    likedTracksCount.value++
+  }
+  const decrementCount = () => {
+    if (likedTracksCount.value > 0) likedTracksCount.value--
+  }
+
   return {
     favorites,
     loading,
@@ -84,5 +114,9 @@ export const useFavoriteStore = defineStore('favorite', () => {
     fetchFavorites,
     saveFavorite,
     goDetail,
+    likedTracksCount, 
+    fetchLikedCount,
+    incrementCount,
+    decrementCount
   }
 }, { persist: true })
