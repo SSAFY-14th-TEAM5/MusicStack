@@ -29,24 +29,27 @@ defineProps({
 <style scoped>
 /* 전체 댓글 영역 */
 .comment-list {
-  margin-top: 48px;
-  padding-top: 28px;
-  border-top: 1px solid #e6e6e6;
+  margin-top: 52px;
+  padding-top: 32px;
+  border-top: 1px solid #2a2a2a;
 }
 
 /* 제목 */
 .comment-title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 20px;
-  color: #222;
+  margin-bottom: 24px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* 댓글 없음 */
 .empty-comment {
   text-align: center;
-  color: #999;
+  color: #555555;
   font-size: 0.9rem;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 </style>

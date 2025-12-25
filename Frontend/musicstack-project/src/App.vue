@@ -27,8 +27,7 @@
           <RouterLink
             :to="{ name: 'Home' }"
             class="brand-link"
-          >
-            🎵 MusicStack
+          >MusicStack
           </RouterLink>
         </div>
 
@@ -90,13 +89,16 @@
 
 
 <style scoped>
-  /* Navbar 배경 */
+  /* ===== Navbar 배경 - 다크 테마 ===== */
   .navbar-custom {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    height: 64px;
+    background: linear-gradient(180deg, #0d0d0d 0%, rgba(13, 13, 13, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    height: 72px;
+    border-bottom: 1px solid rgba(212, 255, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
   }
 
-  /* 브랜드 */
+  /* ===== 브랜드 ===== */
   .navbar-brand-custom {
     position: absolute;
     left: 50%;
@@ -104,69 +106,77 @@
   }
 
   .brand-link {
-    color: white;
-    font-weight: 700;
-    font-size: 1.25rem;
+    color: #D4FF00;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
     text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: opacity 0.2s ease;
+    letter-spacing: 2px;
+    transition: all 0.25s ease;
+    text-shadow: 0 0 20px rgba(212, 255, 0, 0.4);
   }
 
   .brand-link:hover {
-    opacity: 0.85;
+    text-shadow: 0 0 30px rgba(212, 255, 0, 0.7);
+    transform: scale(1.02);
   }
 
-  /* 메뉴 링크 */
+  /* ===== 메뉴 링크 ===== */
   .nav-link-custom {
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.95rem;
     position: relative;
-    padding: 4px 2px;
-    transition: color 0.2s ease, opacity 0.2s ease;
+    padding: 6px 4px;
+    transition: color 0.25s ease;
   }
 
   .nav-link-custom:hover {
-    opacity: 0.85;
+    color: #D4FF00;
   }
 
   /* hover underline 효과 */
   .nav-link-custom::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
     width: 0%;
     height: 2px;
-    background-color: white;
+    background: linear-gradient(90deg, #D4FF00, #E6FF33);
     transition: width 0.25s ease;
+    box-shadow: 0 0 10px rgba(212, 255, 0, 0.5);
   }
 
   .nav-link-custom:hover::after {
     width: 100%;
   }
 
-  /* 로그아웃 버튼 */
+  /* ===== 로그아웃 버튼 ===== */
   .logout-btn {
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
-    color: white;
-    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid rgba(212, 255, 0, 0.4);
+    color: #D4FF00;
+    padding: 8px 18px;
     border-radius: 20px;
-    font-size: 0.9rem;
-    transition: background 0.2s ease, transform 0.2s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
     cursor: pointer;
   }
 
   .logout-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
+    background: #D4FF00;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 255, 0, 0.3);
   }
 
-  /*  현재 페이지(active) 강조 */
+  /* ===== 현재 페이지(active) 강조 ===== */
   .router-link-exact-active {
-    font-weight: 700;
-    opacity: 1;
+    color: #D4FF00 !important;
+    font-weight: 600;
   }
 
   /* underline을 항상 보이게 */
@@ -174,22 +184,22 @@
     width: 100%;
   }
 
-  /* 페이지 전환 기본 */
+  /* ===== 페이지 전환 애니메이션 ===== */
   .page-enter-active,
   .page-leave-active {
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
   /* 들어올 때 */
   .page-enter-from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
 
   /* 나갈 때 */
   .page-leave-to {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-16px);
   }
 
 </style>

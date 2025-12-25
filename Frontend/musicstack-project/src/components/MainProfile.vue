@@ -98,8 +98,8 @@
 .profile-music-row {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
-  gap: 24px;
-  margin-bottom: 36px;
+  gap: 28px;
+  margin-bottom: 40px;
   align-items: stretch;
 }
 
@@ -107,11 +107,18 @@
 .profile-music-card {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px 22px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #f7f7ff, #eef2ff);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+  gap: 20px;
+  padding: 22px 26px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #1e1e1e, #141414);
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+}
+
+.profile-music-card:hover {
+  border-color: rgba(212, 255, 0, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 255, 0, 0.05);
 }
 
 /* 오른쪽 유튜브 영역 */
@@ -126,39 +133,41 @@
   }
 }
 
-
 /* 이미지 */
 .profile-music-cover {
-  width: 90px;
+  width: 100px;
   flex-shrink: 0;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* 정보 영역 */
 .profile-music-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 /* 라벨 */
 .profile-music-info .label {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #6a11cb;
+  color: #D4FF00;
   margin-bottom: 2px;
+  letter-spacing: 0.5px;
 }
 
 /* 제목 */
 .profile-music-info .title {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  color: #222;
-  line-height: 1.2;
+  color: #ffffff;
+  line-height: 1.3;
 }
 
 /* 아티스트 */
 .profile-music-info .artist {
   font-size: 0.85rem;
-  color: #666;
+  color: #888888;
 }
 </style>

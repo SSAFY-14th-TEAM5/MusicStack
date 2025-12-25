@@ -91,39 +91,41 @@ const goDetail = (trackId) => {
 <style scoped>
 /* 전체 영역 */
 .liked-page {
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 /* 로딩 / 빈 상태 */
 .loading,
 .empty {
   text-align: center;
-  color: #888;
-  margin: 24px 0;
+  color: #666666;
+  margin: 28px 0;
   font-size: 0.95rem;
 }
 
 /* Grid */
 .liked-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 22px;
 }
 
 /* 카드 */
 .liked-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 12px;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 14px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  cursor: default;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+  cursor: pointer;
 }
 
 .liked-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  border-color: rgba(212, 255, 0, 0.3);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 255, 0, 0.05);
 }
 
 /* 앨범 이미지 */
@@ -131,16 +133,21 @@ const goDetail = (trackId) => {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.25s ease;
+}
+
+.liked-card:hover .album-img {
+  transform: scale(1.03);
 }
 
 /* 제목 */
 .title {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #222;
-  margin: 6px 0 2px;
+  color: #ffffff;
+  margin: 8px 0 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -149,8 +156,8 @@ const goDetail = (trackId) => {
 /* 아티스트 */
 .artist {
   font-size: 0.8rem;
-  color: #555;
-  margin-bottom: 2px;
+  color: #888888;
+  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -159,6 +166,6 @@ const goDetail = (trackId) => {
 /* 연도 */
 .year {
   font-size: 0.75rem;
-  color: #999;
+  color: #555555;
 }
 </style>
