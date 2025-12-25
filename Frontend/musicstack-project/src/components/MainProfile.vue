@@ -10,6 +10,10 @@
           <h4 class="mb-1 fw-bold">{{ user.nickname }}</h4>
           <small class="text-secondary">@{{ user.username }}</small>
         </div>
+        
+        <button class="btn-ai-recommend ms-auto" @click="router.push({ name: 'RecommendView' })">
+          AI 음악 추천
+        </button>
       </div>
     </div>
     <!-- ✅ 프로필 뮤직 + 유튜브 가로 배치 -->
@@ -62,17 +66,18 @@
   // import UserRecommend from '@/components/UserRecommend.vue'
   // import UserLiked from '@/components/UserLiked.vue'
   import UserLikedList from '@/components/UserLikedList.vue'
-  import { RouterView } from 'vue-router'
+  import { RouterView, useRouter } from 'vue-router'
   // Pinia state를 반응성 유지한 채로 구조 분해위해 사용
   import { storeToRefs } from 'pinia'
   import { useAccountStore } from '@/stores/accounts'
   import { onMounted } from 'vue'
   import YoutubeTrackCard from '@/components/YoutubeTrackCard.vue'
-  
+
 
   const accountStore = useAccountStore()
   const { user } = storeToRefs(accountStore)
   const { profileMusic } = storeToRefs(accountStore)
+  const router = useRouter()
 
   // 새로고침 대응
   onMounted(() => {
@@ -158,5 +163,25 @@
 .profile-music-info .artist {
   font-size: 0.85rem;
   color: #888888;
+}
+
+/* AI 추천 버튼 */
+.btn-ai-recommend {
+  background: #D4FF00;
+  color: #0a0a0a;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(212, 255, 0, 0.2);
+}
+
+.btn-ai-recommend:hover {
+  background: #E6FF33;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 255, 0, 0.4);
 }
 </style>
