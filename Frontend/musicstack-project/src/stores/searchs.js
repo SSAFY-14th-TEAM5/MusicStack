@@ -54,6 +54,12 @@ export const useSearchStore = defineStore('search', () => {
       loading.value = false
     }
   }
+  // 기존 검색 내역 삭제
+  const reset = () => {
+    tracks.value = []
+    success.value = false
+    artist.value = []
+  }
 
   return {
     loading,
@@ -63,5 +69,6 @@ export const useSearchStore = defineStore('search', () => {
     errorMessage,
     cache,
     search,
+    reset,
   }
 }, { persist: true })

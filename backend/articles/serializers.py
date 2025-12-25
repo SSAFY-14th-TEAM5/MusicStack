@@ -10,6 +10,15 @@ class ArticleListSerializer(serializers.ModelSerializer):
         source='comments.count',
         read_only=True
     )
+
+    # 작성자 닉네임 정보를 받아오기 위함
+    class ArticleAuthorSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = ('id', 'nickname')
+
+    author = ArticleAuthorSerializer(read_only=True)
+    
     
     class Meta:
         model = Article

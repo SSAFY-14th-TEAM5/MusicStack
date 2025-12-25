@@ -17,14 +17,25 @@
       🎵 프로필 뮤직으로 설정
     </button>
 
+    <button
+      class="unlike-btn"
+      @click="cancelLike"
+    >
+      <!-- SVG 하트 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      좋아요 취소
+    </button>
+    
     <!-- ✅ 유튜브 영상 -->
     <YoutubeTrackCard
-      v-if="track.video_id"
-      :track="track"
-      title="🎬 뮤직 비디오"
+    v-if="track.video_id"
+    :track="track"
+    title="🎬 뮤직 비디오"
     />
   </div>
-
+  
   <div v-else class="loading">
     노래 정보를 불러오는 중입니다...
   </div>
@@ -33,12 +44,13 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useFavoriteStore } from '@/stores/favorite'
 import { useAccountStore } from '@/stores/accounts'
 import YoutubeTrackCard from '@/components/YoutubeTrackCard.vue'
 
 const route = useRoute()
+const router = useRouter()
 const track = ref(null)
 
 const favoriteStore = useFavoriteStore()
@@ -63,6 +75,27 @@ const setAsProfileMusic = () => {
     video_id: track.value.video_id, // ⭐ 중요
   })
   alert('프로필 뮤직으로 설정되었습니다 🎶')
+  //  프로필 페이지로 이동
+  router.push({ name: 'ProfileView' })
+}
+
+const cancelLike = async () => {
+  if (!track.value) return
+
+  const confirmCancel = confirm('이 노래를 좋아요 목록에서 제거할까요?')
+  if (!confirmCancel) return
+
+  try {
+    await favoriteStore.deleteFavorite(track.value.track_id)
+
+    alert('좋아요가 취소되었습니다.')
+
+    // 👉 좋아요 목록 페이지 or 이전 페이지로 이동
+    router.push({ name: 'ProfileView' })
+    // 또는 router.back()
+  } catch (e) {
+    alert('좋아요 취소 중 오류가 발생했습니다.')
+  }
 }
 </script>
 

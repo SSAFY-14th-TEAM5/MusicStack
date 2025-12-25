@@ -2,7 +2,6 @@
   <div class="detail-page">
     <div v-if="article" class="detail-card">
       <h2 class="detail-title">{{ article.title }}</h2>
-
       <div class="detail-meta">
         <span>작성일 {{ formatDate(article.created_at) }}</span>
         <span v-if="article.updated_at">
