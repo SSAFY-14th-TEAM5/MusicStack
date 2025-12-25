@@ -20,7 +20,7 @@ export const useSearchStore = defineStore('search', () => {
 
     // 캐시에 있으면 API 호출 X
     if (cache.value[normalized]) {
-      console.log('캐시 사용 → API 호출 스킵')
+      // console.log('캐시 사용 → API 호출 스킵')
 
       const cached = cache.value[normalized]
       success.value = cached.success

@@ -78,7 +78,7 @@ onMounted(() => {
 })
 
 const goDetail = (trackId) => {
-  console.log('클릭된 trackId:', trackId)
+  // console.log('클릭된 trackId:', trackId)
   // console.log(track)
   router.push({
     name: 'UserLikedItem',

@@ -1,4 +1,3 @@
-Community
 <template>
   <div class="article-page">
     <div class="article-header">
